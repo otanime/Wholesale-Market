@@ -1,0 +1,28 @@
+<form class="myForm">
+
+  <div class="form-group">
+    <label for="name">cin</label>
+    <input type="text" class="form-control" style="text-transform: uppercase;" value="{{conducteur?.cin}}" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="name">nom</label>
+    <input type="text" class="form-control" style="text-transform: capitalize;" value="{{conducteur?.nom}}" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="name">prenom</label>
+    <input type="text" class="form-control" style="text-transform: capitalize;" value="{{conducteur?.prenom}}" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Telephone</label>
+    <input type="text" class="form-control" style="text-transform: capitalize;" value="{{ (conducteur?.tel !== null)? conducteur?.tel : ' -- ' }}" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="name">adresse</label>
+    <textarea name="name" rows="2" cols="80"class="form-control" style="text-transform: capitalize;" value="{{conducteur?.adresse}}" readonly></textarea>
+  </div>
+
+</form>

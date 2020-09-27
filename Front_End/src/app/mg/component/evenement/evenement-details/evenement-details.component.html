@@ -1,0 +1,138 @@
+<form class="myForm">
+
+
+  <div class="form-row">
+    <div class="form-group col-md-6 text-center">
+      <label for="name">description</label>
+      <textarea name="name" class="form-control" style="text-transform: capitalize;" value="{{evenement?.description}}" readonly></textarea>
+    </div>
+
+    <div class="form-group col-md-6 text-center">
+      <label for="name">observation</label>
+      <textarea name="name" rows="2" cols="80"class="form-control" style="text-transform: capitalize;" value="{{evenement?.observation}}" readonly></textarea>
+    </div>
+
+  </div>
+
+
+  <div class="form-row">
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">status</label>
+      <input type="text" class="form-control" style="text-transform: uppercase;" value="{{evenement?.status}}" readonly>
+    </div>
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">dateDeclaration</label>
+      <input type="text" class="form-control" style="text-transform: uppercase;" value="{{evenement?.dateDeclaration | date :'dd/MM/yyyy HH:mm'}}" readonly>
+    </div>
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">dateEvenement</label>
+      <input type="text" class="form-control" style="text-transform: uppercase;" value="{{evenement?.dateEvenement | date :'dd/MM/yyyy'}}" readonly>
+    </div>
+
+  </div>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">typeEvenement</label>
+      <input type="text" class="form-control" style="text-transform: uppercase;" value="{{evenement?.typeEvenement.libelle}}" readonly>
+    </div>
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">matriculeVehicule</label>
+      <input type="text" class="form-control" style="text-transform: uppercase;" value="{{evenement?.matriculeVehicule}}" readonly>
+    </div>
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">conducteurCin</label>
+      <input type="text" class="form-control" style="text-transform: uppercase;" value="{{evenement?.conducteurCin}}" readonly>
+    </div>
+  </div>
+
+  <label class="myLabel" data-toggle="modal" data-target=".add-sousTypeEmballages" >ajouter un nouveau file</label>
+
+
+  <table *ngIf="files?.length > 0" class="table myTable">
+      <tbody>
+          <tr>
+
+            <th class="text-center" [attr.rowspan]="files?.length * 2">
+              les pieces jointes
+            </th>
+
+          </tr>
+          <tr *ngFor="let file of files;">
+
+            <td class="text-center" >
+              {{file?.name | uppercase}}
+            </td>
+            <td class="project-actions text-center">
+
+                <a class="btn btn-action-edit btn-action"
+                href="{{file?.url}}"
+                title="{{ file?.size | number }} MB">
+                  <i class="fas fa-download"></i>
+                </a>
+
+                <a class="btn btn-action-delete btn-action"
+                (click)="selectedFile = file"
+                data-toggle="modal" data-target=".delete-file">
+                    <i class="fas fa-trash"></i>
+                </a>
+
+            </td>
+          </tr>
+      </tbody>
+  </table>
+
+</form>
+
+<!-- add File -->
+<div class="modal fade add-sousTypeEmballages myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+
+              <form class="myForm">
+
+                <div class="input-group">
+                  <input type="file" class="form-control myFile" (change)="selectFile($event)">
+                  <div class="input-group-append">
+                    <span class="input-group-text myFileButton" (click)="uploadFile()" >Upload</span>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin add File -->
+
+
+<!-- delete file -->
+<div class="modal fade delete-file myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">supprission de file</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+
+              <h4 class="delete-msg">Voulez-vous vraiment supprimer ce file ?!</h4>
+              <input [(ngModel)]="deleteConfirmation" type="text"  parsley-trigger="change" required="" placeholder="confirmez la supprission en saisissant 'YES'" class="form-control delete-confirmation">
+
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="deleteConfirmation.toUpperCase() != 'YES'"
+                (click)="deleteFile()" type="button" class="btn btn-delete waves-effect waves-light">Supprimer</button>
+                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Anuller</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin delete file -->

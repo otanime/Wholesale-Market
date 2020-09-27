@@ -1,0 +1,109 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Add personnel</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header" style="background-color: #6c757d;">
+            <h3 class="card-title">please enter the informations</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form (ngSubmit)="onSubmit(personneModelForm)" [formGroup]="personneModelForm">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">first name</label>
+                    <input type="text" class="form-control" [(ngModel)]="personne.nom" formControlName="nom"
+                      placeholder="Entez Nom" >
+                      <p class="small alert-danger msg-error"
+                      *ngIf="personneModelForm.controls.nom.invalid && (personneModelForm.controls.nom.touched || personneModelForm.controls.nom.dirty)">
+                      Ce champ est null ou mal saisi</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">last name</label>
+                    <input type="text" class="form-control" [(ngModel)]="personne.prenom" formControlName="prenom"
+                      placeholder="Entez prenom" >
+                      <p class="small alert-danger msg-error"
+                      *ngIf="personneModelForm.controls.prenom.invalid && (personneModelForm.controls.prenom.touched || personneModelForm.controls.prenom.dirty)">
+                      Ce champ est null ou mal saisi</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">phone number</label>
+                    <input type="text" class="form-control" id="inputError" [(ngModel)]="personne.tel" formControlName="tel"
+                      placeholder="Reference">
+                      <p class="small alert-danger msg-error"
+                      *ngIf="personneModelForm.controls.tel.invalid && (personneModelForm.controls.tel.touched || personneModelForm.controls.tel.dirty)">
+                      Ce champ est null ou mal saisi</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+
+                  <div class="form-group" *ngIf="id == -1">
+                    <label for="nblit">Profile</label>
+                    <select class="custom-select" [(ngModel)]="type" formControlName="type">
+                      <option [value]="item" *ngFor="let item of options">{{item}}</option>
+
+                    </select>
+                    <p class="small alert-danger msg-error"
+                    *ngIf="personneModelForm.controls.type.invalid && (personneModelForm.controls.type.touched || personneModelForm.controls.type.dirty)">
+                    Ce champ est null ou mal saisi</p>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="adress">Adresse</label>
+                    <textarea id="adress" [(ngModel)]="personne.adresse" formControlName="address" class="form-control"
+                      rows="1"></textarea>
+                      <p class="small alert-danger msg-error"
+                      *ngIf="personneModelForm.controls.address.invalid && (personneModelForm.controls.address.touched || personneModelForm.controls.address.dirty)">
+                      Ce champ est null ou mal saisi</p>
+                  </div>
+                  <div class="form-group" *ngIf="type=='Agent de Balance'">
+                    <label for="exampleInputmatrecule">Matrecule</label>
+                    <input type="text" class="form-control" id="inputError" [(ngModel)]="agentBalance.matrecule"
+                    formControlName="matrecule" placeholder="Matrecule">
+                      <p class="small alert-danger msg-error"
+                      *ngIf="personneModelForm.controls.matrecule.invalid && (personneModelForm.controls.matrecule.touched || personneModelForm.controls.matrecule.dirty)">
+                      Ce champ est null ou mal saisi</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <button 
+               type="submit" class="btn btn-primary" style="background-color: #903479;"
+               [disabled]="personneModelForm.pristine || personneModelForm.invalid || personneModelForm.controls.errors"               
+
+               
+               >Submit</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.card -->
+
+      </div>
+      <!--/.col (left) -->
+
+      <!--/.col (right) -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->

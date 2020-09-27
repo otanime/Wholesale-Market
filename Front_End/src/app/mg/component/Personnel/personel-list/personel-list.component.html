@@ -1,0 +1,108 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+
+            
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">DashBoared</a></li>
+                    <li class="breadcrumb-item active">personnes</li>
+                </ol>
+            </div>
+        </div>
+        <div class="alert alert-success alert-dismissible" *ngIf="message">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-check"></i> Alert!</h5>
+            {{message}}
+          </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> <b> personnels List </b></h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                    title="Remove">
+                    <i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div class="card-body p-0" style="display: block;">
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th style="width: 1%" class="text-center" >
+                            #
+                        </th>
+                        <th style="width: 10%" class="text-center">
+                            Nom
+                        </th>
+                        <th style="width: 10%" class="text-center">
+                            Prenom
+                        </th>
+                        <th style="width: 10%"class="text-center" >
+                            Telephone
+                        </th>
+                        <th style="width: 10%" class="text-center" >
+                           Profile
+                        </th>
+                        <th style="width: 20%" class="text-center" > 
+                            Adresse 
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let personne of personnes;">
+                        <td class="text-center" >
+                           {{personne.idPers}}
+                        </td>
+                        <td style="width: 10%"class="text-center" >
+                            {{personne.nom}}
+                        </td>
+                        <td style="width: 10%"class="text-center" >
+                            {{personne.prenom}}
+                        </td>
+                        <td style="width: 10%"class="text-center" >
+                            {{personne.tel}}
+                        </td> 
+                        <td style="width: 10%"class="text-center" >
+                            {{personne.type}} 
+                        </td>
+                        <td style="width: 20%"class="text-center" >
+                            {{personne.adresse}}
+                        </td>
+                      
+                        <td class="project-actions text-right">
+                            <button class="btn btn-primary btn-sm" (click)="viewpersonne(personne.idPers)">
+                                <i class="fas fa-folder">
+                                </i>
+                                View
+                            </button>
+                            <button class="btn btn-info btn-sm" (click)="updatepersonne(personne.idPers)"  >
+                                <i class="fas fa-pencil-alt">
+                                </i>
+                                Edit
+                            </button>
+                            <button class="btn btn-danger btn-sm" (click)="deletepersonne(personne.idPers)">
+                                <i class="fas fa-trash">
+                                </i>
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>

@@ -1,0 +1,45 @@
+<form [formGroup]="vehiculeForm" class="myForm">
+
+  <div class="form-group">
+    <label for="name">matricule</label>
+    <input type="text" class="form-control" formControlName="matricule" (change)="existsByMatricule($event.target.value)" placeholder="ex : 7851221-A-26" required style="text-transform: uppercase;">
+    <p class="small alert-danger msg-error" *ngIf="vehiculeForm.controls.matricule.invalid && (vehiculeForm.controls.matricule.touched || vehiculeForm.controls.matricule.dirty)">
+      Ce champ est null ou mal saisi <strong *ngIf="existsMatricule">- cette matricule est déjà Enregistrer -</strong></p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">carburant</label>
+    <select class="form-control" formControlName="carburant">
+      <option *ngFor="let option of carburants" [value]="option">{{ option }}</option>
+    </select>
+    <p class="small alert-danger msg-error" *ngIf="vehiculeForm.controls.carburant.invalid && (vehiculeForm.controls.carburant.touched || vehiculeForm.controls.carburant.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">type de Vehicule</label>
+    <select class="form-control" formControlName="typeVehicule" (change)="onSelectTypeVehicule($event.target.value)">
+      <option *ngFor="let option of typeVehicules" [value]="option.id">{{ option.type }}</option>
+    </select>
+    <p class="small alert-danger msg-error" *ngIf="vehiculeForm.controls.typeVehicule.invalid && (vehiculeForm.controls.typeVehicule.touched || vehiculeForm.controls.typeVehicule.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">poids Vide <small class="msg-danger">- le poids vide de ce type de vehicule entre <strong>{{selectedTypeVehicule.poidsMin }} kg</strong> et <strong>{{ selectedTypeVehicule.poidsMax }} kg</strong> -</small> </label>
+    <input type="number" class="form-control" (change)="onChangePoidsVide($event.target.value)" formControlName="poidsVide" placeholder="ex : 1500 Kg" required style="text-transform: capitalize;">
+    <p class="small alert-danger msg-error" *ngIf="vehiculeForm.controls.poidsVide.invalid && (vehiculeForm.controls.poidsVide.touched || vehiculeForm.controls.poidsVide.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">date de Premier Circulation</label>
+    <input type="date" class="form-control" formControlName="datePremierCirculation" [ngModel]="vehicule.datePremierCirculation | date :'yyyy-MM-dd'" required style="text-transform: capitalize;">
+    <p class="small alert-danger msg-error" *ngIf="vehiculeForm.controls.datePremierCirculation.invalid && (vehiculeForm.controls.datePremierCirculation.touched || vehiculeForm.controls.datePremierCirculation.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <button
+
+    type="submit" class="btn btn-form-submit"
+    [disabled]="vehiculeForm.pristine || vehiculeForm.invalid || vehiculeForm.controls.errors"
+    (click)="updateVehicule()"
+    >Enregistrer</button>
+
+</form>

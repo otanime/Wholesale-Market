@@ -1,0 +1,28 @@
+<form class="myForm">
+
+  <div class="form-group">
+    <label for="name">matricule</label>
+    <input type="text" class="form-control" style="text-transform: uppercase;" value="{{vehicule?.matricule}}" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="name">carburant</label>
+    <input type="text" class="form-control" style="text-transform: capitalize;" value="{{vehicule?.carburant}}" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="name">type de Vehicule</label>
+    <input type="text" class="form-control" style="text-transform: capitalize;" value="{{vehicule?.typeVehicule.type}}" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="name">poids Vide</label>
+    <input type="text" class="form-control" style="text-transform: capitalize;" value="{{ vehicule?.poidsVide | number }} Kg" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="name">date Premier Circulation</label>
+    <input type="text" class="form-control" style="text-transform: capitalize;" value="{{vehicule?.datePremierCirculation | date : 'dd-MM-yyyy'}}" readonly>
+  </div>
+
+</form>

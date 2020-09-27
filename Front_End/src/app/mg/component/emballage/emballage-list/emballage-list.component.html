@@ -1,0 +1,180 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+
+
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">DashBoared</a></li>
+                    <li class="breadcrumb-item active">{{componentName}}</li>
+                </ol>
+            </div>
+        </div>
+        <div class="alert alert-success alert-dismissible" *ngIf="message">
+          <button type="butto
+          n" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h5><i class="icon fas fa-check"></i> Alert!</h5>
+          {{message}}
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> <b> Gestion de {{componentName}} </b></h3>
+
+            <div class="card-tools">
+              <a class="btn btn-header btn-action" data-toggle="modal" data-target=".add-emballage">
+                  <i class="fas fa-plus"></i>
+              </a>
+            </div>
+        </div>
+        <div class="card-body p-0" style="display: block;">
+            <table class="table myTable">
+                <thead>
+                    <tr>
+                        <th class="text-center" >
+                            #
+                        </th>
+                        <th class="text-center">
+                            libelle
+                        </th>
+                        <th class="text-center">
+                            poids / poids Embarque
+                        </th>
+                        <th class="text-center">
+                            Type d'emballage
+                        </th>
+                        <th class="text-center">
+                            sous type d'emballage
+                        </th>
+                        <th class="text-center" >
+                            <i class="fas fa-cog"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let emballage of emballages;">
+                      <th class="text-center" >
+                        {{emballage.id}}
+                      </th>
+                      <td class="text-center" >
+                        {{emballage.libelle | uppercase}}
+                      </td>
+                      <td class="text-center" >
+                        {{emballage.poidsMoyen | number }} Kg / {{ emballage.poidsMoyenEmbarque | number }} Kg
+                      </td>
+                      <td class="text-center" >
+                        {{emballage.typeEmballage?.libelle | uppercase}}
+                      </td>
+                      <td class="text-center" >
+                        {{emballage.sousTypeEmballage?.libelle || '-' | uppercase}}
+                      </td>
+
+                      <td class="project-actions text-center">
+                          <a class="btn btn-action-view btn-action"
+                          (click)="selectedEmballage = emballage"
+                          data-toggle="modal" data-target=".show-emballage">
+                              <i class="fas fa-eye"></i>
+                          </a>
+                          <a class="btn btn-action-edit btn-action"
+                          (click)="selectedEmballage = emballage"
+                          data-toggle="modal" data-target=".edit-emballage">
+                              <i class="fas fa-edit"></i>
+                          </a>
+                          <a class="btn btn-action-delete btn-action"
+                          (click)="selectedEmballage = emballage"
+                          data-toggle="modal" data-target=".delete-emballage">
+                              <i class="fas fa-trash"></i>
+                          </a>
+                      </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+
+<!-- add emballage -->
+<div class="modal fade add-emballage myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel"> {{ "nouveau " + componentName | uppercase }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <app-add-emballage
+                (isClosed)="loadData($event)"
+                ></app-add-emballage>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin add emballage -->
+
+<!-- show emballage -->
+<div class="modal fade show-emballage myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">AFFICHER LES INFORMATIONS DE <span>{{ selectedEmballage?.libelle | uppercase }}</span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+              <app-emballage-details
+                [emballage]="selectedEmballage">
+              </app-emballage-details>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin show emballage -->
+
+<!-- update emballage -->
+<div class="modal fade edit-emballage myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">MODIFIER LES INFORMATIONS DE <span>{{ selectedEmballage?.libelle | uppercase }}</span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+              <app-update-emballage
+
+                (isClosed)="loadData($event)"
+                [emballage]="selectedEmballage">
+
+              </app-update-emballage>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin update emballage -->
+
+<!-- delete emballage -->
+<div class="modal fade delete-emballage myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">SUPPRIMER LE CONDUCTEUR <span>{{ selectedEmballage?.libelle | uppercase }}</span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+
+              <h4 class="delete-msg">Voulez-vous vraiment supprimer le emballage ?!</h4>
+              <input [(ngModel)]="deleteConfirmation" type="text"  parsley-trigger="change" required="" placeholder="confirmez la supprission en saisissant 'YES'" class="form-control delete-confirmation">
+
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="deleteConfirmation.toUpperCase() != 'YES'"
+                (click)="deleteClient()" type="button" class="btn btn-delete waves-effect waves-light">Supprimer</button>
+                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Anuller</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin delete emballage -->

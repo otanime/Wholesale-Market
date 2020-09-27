@@ -1,0 +1,40 @@
+<form [formGroup]="conducteurForm" class="myForm">
+
+  <div class="form-group">
+    <label for="name">cin</label>
+    <input type="text" class="form-control" formControlName="cin" placeholder="ex : ee78542" required style="text-transform: uppercase;">
+    <p class="small alert-danger msg-error" *ngIf="conducteurForm.controls.cin.invalid && (conducteurForm.controls.cin.touched || conducteurForm.controls.cin.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">nom</label>
+    <input type="text" class="form-control" formControlName="nom" placeholder="ex : idrissi" required style="text-transform: capitalize;">
+    <p class="small alert-danger msg-error" *ngIf="conducteurForm.controls.nom.invalid && (conducteurForm.controls.nom.touched || conducteurForm.controls.nom.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">prenom</label>
+    <input type="text" class="form-control" formControlName="prenom" placeholder="ex : ayoub" required style="text-transform: capitalize;">
+    <p class="small alert-danger msg-error" *ngIf="conducteurForm.controls.prenom.invalid && (conducteurForm.controls.prenom.touched || conducteurForm.controls.prenom.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Telephone</label>
+    <input type="text" class="form-control" formControlName="tel" placeholder="ex : 06xxxxxxxx" required style="text-transform: capitalize;">
+    <p class="small alert-danger msg-error" *ngIf="conducteurForm.controls.tel.invalid && (conducteurForm.controls.tel.touched || conducteurForm.controls.tel.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">adresse</label>
+    <textarea name="name" rows="2" cols="80"class="form-control" formControlName="adresse" placeholder="ex : Massira 2 Block B Num 157" required style="text-transform: capitalize;"></textarea>
+    <p class="small alert-danger msg-error" *ngIf="conducteurForm.controls.adresse.invalid && (conducteurForm.controls.adresse.touched || conducteurForm.controls.adresse.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <button
+
+    type="submit" class="btn btn-form-submit"
+    [disabled]="conducteurForm.pristine || conducteurForm.invalid || conducteurForm.controls.errors"
+    (click)="addConducteur()"
+    >Enregistrer</button>
+
+</form>

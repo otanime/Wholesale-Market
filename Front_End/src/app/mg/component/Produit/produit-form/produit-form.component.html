@@ -1,0 +1,114 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Add vendeur</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header" style="background-color: #6c757d;">
+            <h3 class="card-title">please enter the informations</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form (ngSubmit)="onSubmit(produitForm)" [formGroup]="produitForm" >
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">libelle</label>
+                    <input type="text" class="form-control" [(ngModel)]="produit.libelle" formControlName="libelle"
+                      placeholder="Enter libelle" required>
+                    <p class="small alert-danger msg-error"
+                      *ngIf="produitForm.controls.libelle.invalid && (produitForm.controls.libelle.touched || produitForm.controls.libelle.dirty)">
+                      Ce champ est null ou mal saisi</p>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">categorie</label>
+                    <select (change)="getValuee()" class="custom-select"
+                      [(ngModel)]="produit.sousTypeProduit.typeProduit.categorie.idProductCategory"
+                      formControlName="categorie">
+                      <option [value]="item.idProductCategory" *ngFor="let item of categories">
+                        {{item.libProductCategory}}</option>
+                    </select>
+                    <p class="small alert-danger msg-error"
+                      *ngIf="produitForm.controls.categorie.invalid && (produitForm.controls.categorie.touched || produitForm.controls.categorie.dirty)">
+                      *Ce champ est null ou mal saisi</p>
+                    <a routerLink="/produits/categorie/add/-1">
+                      nouveau categorie
+                    </a>
+                  </div>
+                  <div class="form-group">
+                    <label for="soustype">sous type</label>
+                    <select class="custom-select" [(ngModel)]="produit.sousTypeProduit.idSousType"
+                      formControlName="soustype">
+                      <option [value]="soustype.idSousType" *ngFor="let soustype of typeproduit.sousTypeProduits">
+                        {{soustype.libelle}}</option>
+                    </select>
+                    <p class="small alert-danger msg-error"
+                    *ngIf="produitForm.controls.soustype.invalid && (produitForm.controls.soustype.touched || produitForm.controls.soustype.dirty)">
+                    *Ce champ est null ou mal saisi</p>
+                    <a routerLink="/produits/soustype/add/-1">
+                      nouveau sous type produit
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6">
+
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Description</label>
+                    <input type="text" class="form-control" [(ngModel)]="produit.discription
+                      " placeholder="Description"  formControlName="description">
+
+                  </div>
+                  <div class="form-group">
+                    <label for="inputDescription"> produit type </label>
+                    <select (change)="getsoustypes()" class="custom-select"
+                      [(ngModel)]="produit.sousTypeProduit.typeProduit.idtypeProduit" formControlName="typeproduit">
+
+                      <option [value]="type.idtypeProduit" *ngFor="let type of categorie.typeProduits ">
+                        {{type.libtypeProduit}}</option>
+                    </select>
+                    <p class="small alert-danger msg-error"
+                      *ngIf="produitForm.controls.typeproduit.invalid && (produitForm.controls.typeproduit.touched || produitForm.controls.typeproduit.dirty)">
+                      *Ce champ est null ou mal saisi</p>
+                    <a routerLink="/produits/type/add/-1">
+                      nouveau type produit
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary"
+                [disabled]="produitForm.pristine || produitForm.invalid || produitForm.controls.errors"
+                style="background-color: #903479;">Submit</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.card -->
+
+      </div>
+      <!--/.col (left) -->
+
+      <!--/.col (right) -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->

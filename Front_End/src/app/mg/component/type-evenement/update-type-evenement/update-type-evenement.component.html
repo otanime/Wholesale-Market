@@ -1,0 +1,17 @@
+<form [formGroup]="typeEvenementForm" class="myForm">
+
+  <div class="form-group">
+    <label for="name">libelle</label>
+    <input type="text" class="form-control" formControlName="libelle" placeholder="ex : ÉCHANGE DE CARTE GRISE" required style="text-transform: uppercase;">
+    <p class="small alert-danger msg-error" *ngIf="typeEvenementForm.controls.libelle.invalid && (typeEvenementForm.controls.libelle.touched || typeEvenementForm.controls.libelle.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+
+  <button
+
+    type="submit" class="btn btn-form-submit"
+    [disabled]="typeEvenementForm.pristine || typeEvenementForm.invalid || typeEvenementForm.controls.errors"
+    (click)="updateTypeEvenement()"
+    >Enregistrer</button>
+
+</form>

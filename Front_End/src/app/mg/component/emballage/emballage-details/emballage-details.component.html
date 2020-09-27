@@ -1,0 +1,34 @@
+<form class="myForm">
+
+  <div class="form-group">
+    <label for="name">libelle</label>
+    <input type="text" class="form-control" style="text-transform: uppercase;" value="{{emballage?.libelle}}" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="name">description</label>
+    <textarea name="name" rows="2" cols="80"class="form-control" style="text-transform: capitalize;" value="{{emballage?.description}}" readonly></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="name">poids Moyen</label>
+    <input type="text" class="form-control" style="text-transform: uppercase;" value="{{emballage?.poidsMoyen}} Kg" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="name">poids Moyen Embarque</label>
+    <input type="text" class="form-control" style="text-transform: uppercase;" value="{{emballage?.poidsMoyenEmbarque}} Kg" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="name">type d'Emballage</label>
+    <input type="text" class="form-control" style="text-transform: uppercase;" value="{{emballage?.typeEmballage.libelle}}" readonly>
+  </div>
+
+  <div class="form-group" *ngIf="emballage?.sousTypeEmballage">
+    <label for="name">sous type d'Emballage</label>
+    <input type="text" class="form-control" style="text-transform: uppercase;" value="{{emballage?.sousTypeEmballage.libelle}}" readonly>
+  </div>
+
+
+</form>

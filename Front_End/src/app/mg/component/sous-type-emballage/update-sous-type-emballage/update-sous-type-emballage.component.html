@@ -1,0 +1,16 @@
+<form [formGroup]="sousTypeEmballageForm" class="myForm">
+
+  <div class="form-group">
+    <label for="name">libelle</label>
+    <input type="text" class="form-control" formControlName="libelle" placeholder="ex : sous Type de Boite " required style="text-transform: uppercase;">
+    <p class="small alert-danger msg-error" *ngIf="sousTypeEmballageForm.controls.libelle.invalid && (sousTypeEmballageForm.controls.libelle.touched || sousTypeEmballageForm.controls.libelle.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <button
+
+    type="submit" class="btn btn-form-submit"
+    [disabled]="sousTypeEmballageForm.pristine || sousTypeEmballageForm.invalid || sousTypeEmballageForm.controls.errors"
+    (click)="updateSousTypeEmballage()"
+    >Enregistrer</button>
+
+</form>

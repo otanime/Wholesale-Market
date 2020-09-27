@@ -1,0 +1,52 @@
+<form [formGroup]="emballageForm" class="myForm">
+
+  <div class="form-group">
+    <label for="name">libelle</label>
+    <input type="text" class="form-control" formControlName="libelle" placeholder="ex : mika maroc 784" required style="text-transform: uppercase;">
+    <p class="small alert-danger msg-error" *ngIf="emballageForm.controls.libelle.invalid && (emballageForm.controls.libelle.touched || emballageForm.controls.libelle.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">description</label>
+    <textarea name="name" rows="2" cols="80"class="form-control" formControlName="description" placeholder="ex : mika maroc 784 est un nouveau emballage avec des caracteristiques fort" required style="text-transform: capitalize;"></textarea>
+    <p class="small alert-danger msg-error" *ngIf="emballageForm.controls.description.invalid && (emballageForm.controls.description.touched || emballageForm.controls.description.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">poids Moyen</label>
+    <input type="number" step="1" min="0.1" class="form-control" formControlName="poidsMoyen" placeholder="ex : 20" required style="text-transform: capitalize;">
+    <p class="small alert-danger msg-error" *ngIf="emballageForm.controls.poidsMoyen.invalid && (emballageForm.controls.poidsMoyen.touched || emballageForm.controls.poidsMoyen.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">poids Moyen Embarque</label>
+    <input type="number" step="1" min="0.1" class="form-control" formControlName="poidsMoyenEmbarque" placeholder="ex : 35" required style="text-transform: capitalize;">
+    <p class="small alert-danger msg-error" *ngIf="emballageForm.controls.poidsMoyenEmbarque.invalid && (emballageForm.controls.poidsMoyenEmbarque.touched || emballageForm.controls.poidsMoyenEmbarque.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">type d'Emballage</label>
+    <select class="form-control" formControlName="typeEmballage" (change)="onSelectTypeEmballage($event.target.value)">
+      <option *ngFor="let option of typeEmballages" [value]="option.id" >{{ option.libelle }}</option>
+    </select>
+    <p class="small alert-danger msg-error" *ngIf="emballageForm.controls.typeEmballage.invalid && (emballageForm.controls.typeEmballage.touched || emballageForm.controls.typeEmballage.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+  <div class="form-group" *ngIf="selectedTypeEmballage && selectedTypeEmballage?.sousTypeEmballages.length > 0">
+    <label for="name">sous type d'Emballage</label>
+    <select class="form-control" formControlName="sousTypeEmballage" (change)="onSelectSousTypeEmballage($event.target.value)">
+      <option *ngFor="let option of selectedTypeEmballage?.sousTypeEmballages" [value]="option.id">{{ option.libelle }}</option>
+    </select>
+    <p class="small alert-danger msg-error" *ngIf="emballageForm.controls.sousTypeEmballage.invalid && (emballageForm.controls.sousTypeEmballage.touched || emballageForm.controls.sousTypeEmballage.dirty)">Ce champ est null ou mal saisi</p>
+  </div>
+
+
+
+  <button
+
+    type="submit" class="btn btn-form-submit"
+    [disabled]="emballageForm.pristine || emballageForm.invalid || emballageForm.controls.errors"
+    (click)="updateEmballage()"
+    >Enregistrer</button>
+
+</form>

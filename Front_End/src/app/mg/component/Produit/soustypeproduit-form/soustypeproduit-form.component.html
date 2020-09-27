@@ -1,0 +1,72 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-cat"><a href="#">Home</a></li>
+            <li class="breadcrumb-cat active">Ajouter typeproduit</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section> 
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->      
+          <div class="card card-primary">
+            <div class="card-header" style="background-color: #6c757d;">
+              <h3 class="card-title">please enter the informations</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form (ngSubmit)="onSubmit(typeproduitModelForm)"  #typeproduitModelForm="ngForm">
+              <div class="card-body">
+                <div class="row">
+                  
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="typeproduit_lib"> sous type de produit </label>
+                      <input type="text" class="form-control" [(ngModel)]= "soustype.libtypeProduit" name="soustypeproduit2" placeholder="Entrez sous type produit" required>
+                    </div>
+                    
+                  </div>
+                  <div class="col-md-6">
+                      
+                      <div class="form-group">
+                        <label for="inputDescription"> type de produit </label>
+                        <select  class="custom-select" [(ngModel)]="soustype.typeProduit.idtypeProduit" name="typeProduit">
+                          
+                          <option [value]="type.idtypeProduit" *ngFor="let type of typeproduits ">{{type.libtypeProduit}}</option>
+                      </select>
+                      <a routerLink="/produits/type/add/-2" >
+                        nouveau type produit
+                       </a>
+                      </div> 
+                  
+                    </div>
+
+                </div>
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary" [disabled]="!typeproduitModelForm.form.valid"
+                  style="background-color: #903479;">Submit</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+
+        </div>
+        <!--/.col (left) -->
+
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->

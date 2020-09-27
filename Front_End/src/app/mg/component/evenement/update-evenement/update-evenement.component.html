@@ -1,0 +1,76 @@
+<form [formGroup]="evenementForm" class="myForm">
+
+  <div class="form-row">
+    <div class="form-group col-md-6 text-center">
+      <label for="name">description</label>
+      <textarea name="name" rows="2" cols="80"class="form-control" formControlName="description" placeholder="ex : Massira 2 Block B Num 157" required style="text-transform: capitalize;"></textarea>
+      <p class="small alert-danger msg-error" *ngIf="evenementForm.controls.description.invalid && (evenementForm.controls.description.touched || evenementForm.controls.description.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-6 text-center">
+      <label for="name">observation</label>
+      <textarea name="name" rows="2" cols="80"class="form-control" formControlName="observation" placeholder="ex : Massira 2 Block B Num 157" required style="text-transform: capitalize;"></textarea>
+      <p class="small alert-danger msg-error" *ngIf="evenementForm.controls.observation.invalid && (evenementForm.controls.observation.touched || evenementForm.controls.observation.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6 text-center">
+      <label for="name">Declaration le</label>
+      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="dateDeclaration" readonly>
+    </div>
+
+    <div class="form-group col-md-6 text-center">
+      <label for="name">Evenement le</label>
+      <input type="date" class="form-control" formControlName="dateEvenement" [ngModel]="evenement?.dateEvenement | date:'yyyy-MM-dd'" required style="text-transform: capitalize;">
+      <p class="small alert-danger msg-error" *ngIf="evenementForm.controls.dateEvenement.invalid && (evenementForm.controls.dateEvenement.touched || evenementForm.controls.dateEvenement.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4 text-center">
+      <label for="name">conducteur</label>
+      <select class="form-control" formControlName="conducteurCin">
+        <option *ngFor="let option of conducteurs" [value]="option.cin">[ {{ option.cin }} ] : {{ option.nom + ' ' + option.prenom | uppercase}}</option>
+      </select>
+      <p class="small alert-danger msg-error" *ngIf="evenementForm.controls.conducteurCin.invalid && (evenementForm.controls.conducteurCin.touched || evenementForm.controls.conducteurCin.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">Vehicule</label>
+      <select class="form-control" formControlName="matriculeVehicule">
+        <option *ngFor="let option of vehicules" [value]="option.matricule">{{ option.matricule }}</option>
+      </select>
+      <p class="small alert-danger msg-error" *ngIf="evenementForm.controls.matriculeVehicule.invalid && (evenementForm.controls.matriculeVehicule.touched || evenementForm.controls.matriculeVehicule.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">type d'Evenement</label>
+      <select class="form-control" formControlName="typeEvenement">
+        <option *ngFor="let option of typeEvenements" [value]="option.id">{{ option.libelle }}</option>
+      </select>
+      <p class="small alert-danger msg-error" *ngIf="evenementForm.controls.typeEvenement.invalid && (evenementForm.controls.typeEvenement.touched || evenementForm.controls.typeEvenement.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+  </div>
+
+
+  <button
+
+    type="submit" class="btn btn-form-submit"
+    [disabled]="evenementForm.pristine || evenementForm.invalid || evenementForm.controls.errors"
+    (click)="updateEvenement()"
+    >Enregistrer</button>
+
+    <button
+
+      type="submit" class="btn btn-form-submit btn-annulee"
+      (click)="annulationEvenement()"
+      >annulée</button>
+
+      <button
+
+        type="submit" class="btn btn-form-submit btn-resoudree"
+        (click)="confirmationEvenement()"
+        >RESOUDrée</button>
+
+</form>
