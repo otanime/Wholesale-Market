@@ -39,7 +39,7 @@
                                         <p class="small alert-danger msg-error"
                                             *ngIf="tarifForm.controls.idA.invalid && (tarifForm.controls.idA.touched || tarifForm.controls.idA.dirty)">
                                             *Ce champ est null ou mal saisi</p>
-                                        <a routerLink="/personnel/add/-1">
+                                        <a routerLink="/personnels/add/-1">
                                             nouveau Agent de commission
                                         </a>
                                     </div>
@@ -113,7 +113,6 @@
                             <button type="submit" class="btn btn-primary"
                                 [disabled]="tarifForm.pristine || tarifForm.invalid || tarifForm.controls.errors"
                                 style="background-color: #903479;">Submit</button>
-                                <label *ngIf="tarifForm.errors">{{ form.errors?.dates }}</label>
                         </div>
                     </form>
                 </div>
