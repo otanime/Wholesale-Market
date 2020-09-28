@@ -46,7 +46,6 @@ import { SousTypeEmballageDetailsComponent } from './mg/component/sous-type-emba
 import { SousTypeEmballageListComponent } from './mg/component/sous-type-emballage/sous-type-emballage-list/sous-type-emballage-list.component';
 import { AddSousTypeEmballageComponent } from './mg/component/sous-type-emballage/add-sous-type-emballage/add-sous-type-emballage.component';
 import { UpdateSousTypeEmballageComponent } from './mg/component/sous-type-emballage/update-sous-type-emballage/update-sous-type-emballage.component';
-<<<<<<< HEAD
 import { TypeEvenementDetailsComponent } from './mg/component/type-evenement/type-evenement-details/type-evenement-details.component';
 import { TypeEvenementListComponent } from './mg/component/type-evenement/type-evenement-list/type-evenement-list.component';
 import { AddTypeEvenementComponent } from './mg/component/type-evenement/add-type-evenement/add-type-evenement.component';
@@ -56,9 +55,9 @@ import { AddEvenementComponent } from './mg/component/evenement/add-evenement/ad
 import { EvenementListComponent } from './mg/component/evenement/evenement-list/evenement-list.component';
 import { EvenementDetailsComponent } from './mg/component/evenement/evenement-details/evenement-details.component';
 
-=======
 import { CategorieproduitFormComponent } from './mg/component/Produit/categorieproduit-form/categorieproduit-form.component';
->>>>>>> bb6d97733aa9ee580d6e9fb4231fb55e4d854ceb
+import { TarificationFormComponent } from './mg/component/tarification/tarification-form/tarification-form.component';
+import { TarificationListComponent } from './mg/component/tarification/tarification-list/tarification-list.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +113,9 @@ import { CategorieproduitFormComponent } from './mg/component/Produit/categoriep
     UpdateEvenementComponent,
     AddEvenementComponent,
     EvenementListComponent,
-    EvenementDetailsComponent
+    EvenementDetailsComponent,
+    TarificationFormComponent,
+    TarificationListComponent
 
   ],
   imports: [
