@@ -18,7 +18,7 @@ import ma.sic.mg.personnel.repository.IAgentCommissionRep;
 
 
 @RestController
-@RequestMapping("agentCommissions")
+@RequestMapping("agentcommissions")
 @CrossOrigin(origins = "http://localhost:4200")  
 public class AgentCommissionController {
 	@Autowired

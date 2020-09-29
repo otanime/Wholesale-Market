@@ -63,7 +63,7 @@ export class PersoneFormComponent implements OnInit {
       }
      if(this.type =="Agent de Commission"){
         this.Agentc=  this.personne ;
-        this.vs.createmandataire(this.Agentc)
+        this.vs.createAgentCommission(this.Agentc)
         .subscribe(data=> { 
           console.log(data);
           this.router.navigate(['./personnels/list']);

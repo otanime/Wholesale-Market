@@ -8,6 +8,8 @@ import { LigneTarification } from 'src/app/mg/modules/LigneTarification';
 import { LigneID } from 'src/app/mg/modules/LigneTarifPk';
 import { Produit } from 'src/app/mg/modules/Produit';
 import { Tarif } from 'src/app/mg/modules/Tarification';
+import { PersonneService } from '../../Personnel/services/personne.service';
+import { ProduitService } from '../../Produit/services/produit.service';
 import { TarifService } from '../services/tarif.service';
 
 @Component({
@@ -25,7 +27,7 @@ selectedFile: File;
 pj : FileDB
 tarifForm :FormGroup
 
-  constructor(private datePipe: DatePipe ,private form: FormBuilder, private ts: TarifService , private router: Router, private route: ActivatedRoute) {
+  constructor(private datePipe: DatePipe ,private form: FormBuilder,private tp : PersonneService,private tpr : ProduitService, private ts: TarifService , private router: Router, private route: ActivatedRoute) {
 
     this.tarifForm = form.group({
        idA : ['',Validators.required],
@@ -54,36 +56,45 @@ tarifForm :FormGroup
     this.lg = new LigneTarification();
     this.lg.ligneID = new LigneID();
     this.lg.tarif = new Tarif() ;
-    this.pj = new FileDB();
+    
+    this.tp.getAgentsComissions().subscribe(data => {
+      this.agents = data
+    });
+    this.tpr.getProducts().subscribe(data => {
+      this.produits = data
+    });
+    this.setCurrentDate()
   }
 
   public onFileChanged(event) {
         //Select File
         this.selectedFile = event.target.files[0];
+        console.log(this.selectedFile.name);
+        console.log(this.selectedFile);
    
       }
+      
       onSubmit() {
-        this.pj.name = this.selectedFile.name
-        this.pj.type = this.selectedFile.type
-        this.pj.data = this.selectedFile
 
-this.ts.sendFile(this.pj).subscribe(data => {
-  console.log(data);
-
-});
+   this.lg.tarif.pj =this.selectedFile
+   this.lg.tarif.status = "enCours"
+        this.lg.oldPrix = 0
+        this.lg.dateModification = new Date(this.datePipe.transform(new Date(), 'MM/dd/yyyy'))
+         this.ts.createtarif(this.lg)
+         .subscribe(data => {
+          console.log(data);
+         });
 
       }
       onChangedate(){
-console.log(this.lg.dateFin)
- let dd = new Date(this.lg.dateDebut)
- let  df = new Date(this.lg.dateFin)
-if(df>=dd){
-df.setDate(dd.getDate() + 1 )
+       
+      
+   }
+   setCurrentDate(){
 
+    this.tarifForm.controls.dateFrom.setValue(formatDate(new Date(), 'dd/MM/yyyy HH:mm', 'en'));
 
-console.log(df.getDate() +" :"+ this.datePipe.transform(df, 'MM/dd/yyyy'))
-}
-      }
+  }
 
 
 

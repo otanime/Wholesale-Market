@@ -26,6 +26,9 @@ export class PersonneService {
   getPersonne(id) {
     return this.http.get<Personne>(`${personesUrl}/find/${id}`);
   }
+  getAgentsComissions() {
+    return this.http.get<AgentCommission[]>(`${AgentCommisionUrl}/all`); 
+  }
 
   createmandataire(mandataire: Mandataire): Observable<any> {
     return this.http.post<Mandataire>(MandatairesUrl + '/save',mandataire);
