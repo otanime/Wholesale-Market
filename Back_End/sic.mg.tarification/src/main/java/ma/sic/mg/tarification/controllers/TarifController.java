@@ -17,6 +17,7 @@ import ma.sic.mg.tarification.repositories.TarifRepo;
 
 @RestController
 @RequestMapping("api/tarifs")
+@CrossOrigin(origins = "http://localhost:4200")  
 public class TarifController {
 
 

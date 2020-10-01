@@ -31,7 +31,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Agent de comission</label>
-                                        <select class="custom-select" [(ngModel)]="lg.ligneID.idAgentCommission"
+                                        <select class="custom-select" [(ngModel)]="lg.idAgentCommission"
                                             formControlName="idA">
                                             <option [value]="a.idPers" *ngFor="let a of agents"> {{a.nom}} {{a.prenom}}
                                             </option>
@@ -77,7 +77,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Prix </label>
-                                        <input type="number" class="form-control" [(ngModel)]="lg.prix"
+                                        <input type="number" class="form-control" [(ngModel)]="lg.tarif.prix"
                                             placeholder="Prix" formControlName="prix">
 
                                     </div>

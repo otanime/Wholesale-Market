@@ -11,11 +11,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Entity
 @Table(name = "files")
 @Data
+@JsonIgnoreProperties(value = ("tarif"), allowSetters = true)
 public class FileDB {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

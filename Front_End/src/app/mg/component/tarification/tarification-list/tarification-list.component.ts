@@ -29,7 +29,7 @@ message;
         });  
   }
   viewtarif( id :LigneID){
-    
+    this.route.navigate(["tarifs/view"], { queryParams: { param1: id.idProduit ,param2 : id.idTarif} });
   }
 
 }

@@ -58,6 +58,7 @@ import { EvenementDetailsComponent } from './mg/component/evenement/evenement-de
 import { CategorieproduitFormComponent } from './mg/component/Produit/categorieproduit-form/categorieproduit-form.component';
 import { TarificationFormComponent } from './mg/component/tarification/tarification-form/tarification-form.component';
 import { TarificationListComponent } from './mg/component/tarification/tarification-list/tarification-list.component';
+import { TarificationDetailComponent } from './mg/component/tarification/tarification-detail/tarification-detail.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { TarificationListComponent } from './mg/component/tarification/tarificat
     EvenementListComponent,
     EvenementDetailsComponent,
     TarificationFormComponent,
-    TarificationListComponent
+    TarificationListComponent,
+    TarificationDetailComponent
 
   ],
   imports: [

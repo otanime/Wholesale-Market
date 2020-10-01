@@ -6,7 +6,7 @@ export class LigneTarification {
     dateDebut:        Date;
     dateFin:          Date;
     dateModification: Date;
+    idAgentCommission: number;
     oldPrix:          number;
     tarif:            Tarif;
-    prix :             number
 }

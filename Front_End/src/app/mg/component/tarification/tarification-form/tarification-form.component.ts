@@ -20,28 +20,30 @@ import { TarifService } from '../services/tarif.service';
 })
 export class TarificationFormComponent implements OnInit {
 
-agents : AgentCommission[]
-produits : Produit []
-lg : LigneTarification
-selectedFile: File;
-pj : FileDB
-tarifForm :FormGroup
+  agents: AgentCommission[]
+  produits: Produit[]
+  lg: LigneTarification
+  selectedFile: File;
+  pj: FileDB
+  tarifForm: FormGroup
+  tarifAdded: Tarif
+  idt : number
 
-  constructor(private datePipe: DatePipe ,private form: FormBuilder,private tp : PersonneService,private tpr : ProduitService, private ts: TarifService , private router: Router, private route: ActivatedRoute) {
+  constructor(private datePipe: DatePipe, private form: FormBuilder, private tp: PersonneService, private tpr: ProduitService, private ts: TarifService, private router: Router, private route: ActivatedRoute) {
 
     this.tarifForm = form.group({
-       idA : ['',Validators.required],
+      idA: ['', Validators.required],
       idp: [''],
       dateFrom: ['', Validators.required],
-      prix : ['', Validators.required],
+      prix: ['', Validators.required],
       dateTo: ['', Validators.required],
-  
-    }, {validator: this.dateLessThan('dateFrom', 'dateTo')}); 
-    
 
-   }
-   dateLessThan(from: string, to: string) {
-    return (group: FormGroup): {[key: string]: any} => {
+    }, { validator: this.dateLessThan('dateFrom', 'dateTo') });
+
+
+  }
+  dateLessThan(from: string, to: string) {
+    return (group: FormGroup): { [key: string]: any } => {
       let f = group.controls[from];
       let t = group.controls[to];
       if (f.value > t.value) {
@@ -55,8 +57,8 @@ tarifForm :FormGroup
   ngOnInit() {
     this.lg = new LigneTarification();
     this.lg.ligneID = new LigneID();
-    this.lg.tarif = new Tarif() ;
-    
+    this.lg.tarif = new Tarif();
+
     this.tp.getAgentsComissions().subscribe(data => {
       this.agents = data
     });
@@ -67,30 +69,52 @@ tarifForm :FormGroup
   }
 
   public onFileChanged(event) {
-        //Select File
-        this.selectedFile = event.target.files[0];
-        console.log(this.selectedFile.name);
-        console.log(this.selectedFile);
+    //Select File
+    this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile.name);
+    console.log(this.selectedFile);
+
+  }
+
+  onSubmit() {
+    console.log(this.selectedFile.name);
+    console.log(this.selectedFile);
+    this.tarifAdded = new Tarif();
+    this.lg.oldPrix = 0
+    this.lg.dateModification = new Date(this.datePipe.transform(new Date(), 'MM/dd/yyyy'))
+    this.ts.addTarif(this.lg.tarif)
+      .subscribe(data => 
+        {   
+          this.idt = data.idTarif
+          this.lg.ligneID.idTarif =this.idt
+          this.lg.tarif.idTarif= this.idt
+
+          this.ts.addFile(this.idt, this.selectedFile).subscribe(data => {
+            console.log(data);
+          });
    
-      }
-      
-      onSubmit() {
 
-   this.lg.tarif.pj =this.selectedFile
-   this.lg.tarif.status = "enCours"
-        this.lg.oldPrix = 0
-        this.lg.dateModification = new Date(this.datePipe.transform(new Date(), 'MM/dd/yyyy'))
-         this.ts.createtarif(this.lg)
-         .subscribe(data => {
-          console.log(data);
-         });
+          
 
-      }
-      onChangedate(){
-       
-      
-   }
-   setCurrentDate(){
+    this.ts.createtarif(this.lg)
+    .subscribe(data => {
+      console.log(data);
+    });
+
+          }
+      );
+   
+
+ 
+   
+    this.router.navigate(['/tarifs/list']);
+
+  }
+  onChangedate() {
+
+
+  }
+  setCurrentDate() {
 
     this.tarifForm.controls.dateFrom.setValue(formatDate(new Date(), 'dd/MM/yyyy HH:mm', 'en'));
 
