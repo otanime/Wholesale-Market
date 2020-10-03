@@ -1,0 +1,13 @@
+application.properties
+*.swp
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.springBeans/
+target/
+bin/
+build/
+.classpath
