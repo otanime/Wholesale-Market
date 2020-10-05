@@ -1,0 +1,164 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">tarification Detail</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header" style="background-color: #6c757d;">
+                        <h3 class="card-title"> Ligne Tarification </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form #tarifForm="ngForm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="exampleInputEmail1">first name</label>
+                                    <input type="text" class="form-control"value="{{personne.nom}}" readonly 
+
+                                     >
+                                    <label for="exampleInputPassword1">phone number</label>
+                                    <input type="text" class="form-control" id="inputError"value="{{personne.tel}}" 
+
+                                         placeholder="tel" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="exampleInputEmail1">prenom</label>
+                                    <input type="text" class="form-control"value="{{personne.prenom}}" readonly 
+
+                                       >
+
+                                    <label for="adress">Adresse</label>
+                                    <textarea id="adress"value="{{personne.adresse}}" class="form-control" rows="1" 
+
+                                        readonly></textarea>
+                                </div>
+  
+                          </div>
+                          <br/>
+
+                          <div class="card-header" style="background-color: #6c757d;">
+                            <h3 class="card-title" style="color: white;">Produit </h3>
+                        </div>
+                       <div class="row">
+                            <div class="col-md-6">
+                        
+                                <label for="exampleInputEmail1">libelle</label>
+                                <input type="text" class="form-control"value="{{produit.libelle}}" 
+
+                                  readonly>
+                        
+                        
+                        
+                                <label for="soustype">sous type</label>
+                                <input type="text" class="form-control"value="{{produit.sousTypeProduit.libelle}}" 
+
+                                  readonly>
+                        
+                            </div>
+                            <div class="col-md-6">
+                                <label for="exampleInputEmail1">categorie</label>
+                                <input type="text" class="form-control"value="{{produit.sousTypeProduit.typeProduit.categorie.libProductCategory}}"
+                                    placeholder="categorie" readonly>
+                        
+                                <label for="inputDescription"> produit type </label>
+                                <input type="text" class="form-control"value="{{produit.sousTypeProduit.typeProduit.libtypeProduit}}"  
+                                    placeholder="categorie" readonly>
+                        
+                            </div>
+                        </div> 
+<br/>                        
+                          <div class="card-header" style="background-color: #6c757d;">
+                            <h3 class="card-title" style="color: white;">Tarif</h3>
+                        </div>
+<div class="row">
+ 
+    <div class="col-md-6">
+        <label for="exampleInputEmail1">prix</label>
+        <input type="text" class="form-control" value="{{lg.tarif.prix}}"  
+           readonly>
+    </div>
+    <div class="col-md-6">
+        <label for="exampleInputEmail1">status</label>
+        <input type="text" class="form-control" value="{{lg.tarif.status}}"   readonly>  
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+
+
+        <label for="exampleInputPassword1"> Date Debut </label>
+        <input type="date" class="form-control"value="{{lg.dateDebut}}"  
+         readonly>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Ancien Prix </label>
+            <input type="number" class="form-control"value="{{lg.oldPrix}}"  
+                readonly>
+
+        </div>
+        <label for="exampleInputPassword1">Piece Join</label>
+
+    </div>
+
+    <div class="col-md-6">
+
+
+        <label for="exampleInputPassword1"> Date fin </label>
+        <input type="date" class="form-control"value="{{lg.dateFin}}"    readonly> 
+        <label for="exampleInputPassword1"> Date Modification </label>
+        <input type="date" class="form-control"value="{{lg.dateDebut}}"  readonly>
+        <br/>
+        <div *ngFor="let file of lg.tarif.pj;"> 
+            <a routerLink="{{file.url}}"  class="btn-link text-secondary"> {{file.name }}</a>
+
+        </div>
+       
+
+
+    </div>
+
+</div>
+
+                        
+
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button (click)="ajouterTarif()" class="btn btn-primary" style="background-color: #903479;">Ajouter nouveau tarif</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card -->
+
+            </div>
+
+
+            <!--/.col (left) -->
+
+            <!--/.col (right) -->
+        </div>
+    </div>
+
+
+
+    <!-- /.row -->
+   <!-- /.container-fluid -->
+</section>

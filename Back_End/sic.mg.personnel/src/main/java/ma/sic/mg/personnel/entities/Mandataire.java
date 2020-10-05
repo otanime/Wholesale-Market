@@ -13,7 +13,6 @@ import lombok.ToString;
 import ma.sic.mg.personnel.entities.*;
 @Entity 
 @ToString
-@NoArgsConstructor
 @DiscriminatorValue("Mandataire")
 public class Mandataire  extends Personne  implements Serializable {
 

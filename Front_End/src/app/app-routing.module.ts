@@ -29,6 +29,9 @@ import { TypeEmballageListComponent } from './mg/component/type-emballage/type-e
 // Evenement MS
 import { EvenementListComponent } from './mg/component/evenement/evenement-list/evenement-list.component';
 import { TypeEvenementListComponent } from './mg/component/type-evenement/type-evenement-list/type-evenement-list.component';
+import { TarificationListComponent } from './mg/component/tarification/tarification-list/tarification-list.component';
+import { TarificationFormComponent } from './mg/component/tarification/tarification-form/tarification-form.component';
+import { TarificationDetailComponent } from './mg/component/tarification/tarification-detail/tarification-detail.component';
 
 
 
@@ -50,6 +53,10 @@ const routes: Routes = [
   {path: 'produits/type/add/:id',component : TypeproduitFormComponent},
   {path: 'produits/soustype/add/:id',component : SoustypeproduitFormComponent},
   {path: 'produits/categorie/add/:id',component : CategorieproduitFormComponent},
+  {path: 'tarifs/list',component : TarificationListComponent},
+  {path: 'tarifs/add/:id',component : TarificationFormComponent},
+  {path: 'tarifs/list',component : TarificationListComponent},
+  {path: 'tarifs/view',component : TarificationDetailComponent},
   
     // Conducteur MS
     {path: 'conducteurs',component : ConducteurListComponent},

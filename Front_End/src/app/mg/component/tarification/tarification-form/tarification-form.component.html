@@ -1,0 +1,128 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Ajout tarification</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header" style="background-color: #6c757d;">
+                        <h3 class="card-title">please enter the informations</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form (ngSubmit)="onSubmit(tarifForm)" [formGroup]="tarifForm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Agent de comission</label>
+                                        <select class="custom-select" [(ngModel)]="lg.idAgentCommission"
+                                            formControlName="idA">
+                                            <option [value]="a.idPers" *ngFor="let a of agents"> {{a.nom}} {{a.prenom}}
+                                            </option>
+                                        </select>
+                                        <p class="small alert-danger msg-error"
+                                            *ngIf="tarifForm.controls.idA.invalid && (tarifForm.controls.idA.touched || tarifForm.controls.idA.dirty)">
+                                            *Ce champ est null ou mal saisi</p>
+                                        <a routerLink="/personnels/add/-1">
+                                            nouveau Agent de commission
+                                        </a>
+                                         
+                                    </div>
+                                </div>
+                                    <div class="col-md-6">
+
+                                 
+                                    <div class="form-group">
+                                        <label for="idp">Produit </label>
+                                        <select class="custom-select" [(ngModel)]="lg.ligneID.idProduit"
+                                            formControlName="idp">
+                                            <option [value]="p.idProduit" *ngFor="let p of produits">
+                                                {{p.libelle}}</option>
+                                        </select>
+                                        <p class="small alert-danger msg-error"
+                                            *ngIf="tarifForm.controls.idp.invalid && (tarifForm.controls.idp.touched || tarifForm.controls.idp.dirty)">
+                                            *Ce champ est null ou mal saisi</p>
+                                        <a routerLink="/produits/add/-1">
+                                            nouveau produit
+                                        </a>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1"> Date Debut </label>
+                                        <input type="date" class="form-control" [(ngModel)]="lg.dateDebut"
+                                          (change)="onChangedate()"  formControlName="dateFrom">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Prix </label>
+                                        <input type="number" class="form-control" [(ngModel)]="lg.tarif.prix"
+                                            placeholder="Prix" formControlName="prix">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1"> Date fin </label>
+                                        <input type="date" class="form-control" [(ngModel)]="lg.dateFin"
+                                            placeholder="Date fin" formControlName="dateTo" (change)="onChangedate()" >
+        
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Piece join </label>
+                                            <input type="file" class="form-control" (change)="onFileChanged($event)">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary"
+                                [disabled]="tarifForm.pristine || tarifForm.invalid || tarifForm.controls.errors"
+                                style="background-color: #903479;">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card -->
+
+            </div>
+            <!--/.col (left) -->
+
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
