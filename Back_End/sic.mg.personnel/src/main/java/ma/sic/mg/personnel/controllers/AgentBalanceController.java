@@ -18,28 +18,28 @@ import ma.sic.mg.personnel.repository.IAgentBalanceRep;
 
 
 @RestController
-@RequestMapping("agentbalances")
+@RequestMapping("api/agentbalances")
 @CrossOrigin(origins = "http://localhost:4200")  
 public class AgentBalanceController {
 	@Autowired
 	private IAgentBalanceRep AgentBalanceRepository;
 	
-	@GetMapping("/all")
+	@GetMapping("")
 	public List<AgentBalance> findAll(){
 		return AgentBalanceRepository.findAll();
 	}
-	@GetMapping("/find/{id}")
+	@GetMapping("/{id}")
 	public AgentBalance findAgentBalance(@PathVariable(required = true) String id){
 		
 		return AgentBalanceRepository.findById(Integer.parseInt(id));
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("")
 	public void save(@RequestBody AgentBalance AgentBalance) {
 		AgentBalanceRepository.save(AgentBalance);
 	}
 	
-	@DeleteMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable(required = true) String id){
 		System.out.println("id = "+id);
 		AgentBalance AgentBalance=AgentBalanceRepository.findById(Integer.parseInt(id));

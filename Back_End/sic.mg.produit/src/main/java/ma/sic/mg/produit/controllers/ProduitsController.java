@@ -18,28 +18,28 @@ import ma.sic.mg.produit.repositories.IProduitRepository;
 
 
 @RestController
-@RequestMapping("produits")
+@RequestMapping("api/produits")
 @CrossOrigin(origins = "http://localhost:4200")  
 public class ProduitsController {
 	@Autowired
 	private IProduitRepository ProduitRepository;
 	
-	@GetMapping("/all")
+	@GetMapping("")
 	public List<Produit> findAll(){
 		return ProduitRepository.findAll();
 	}
-	@GetMapping("/find/{id}")
+	@GetMapping("/{id}")
 	public Produit findProduit(@PathVariable(required = true) String id){
 		return ProduitRepository.findById(Integer.parseInt(id));
 	}
 	
 	
-	@PostMapping("/save")
+	@PostMapping("")
 	public void save(@RequestBody Produit Produit) {
 		ProduitRepository.save(Produit);
 	}
 	
-	@DeleteMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable(required = true) String id){
 		System.out.println("id = "+id);
 		Produit Produit=ProduitRepository.findById(Integer.parseInt(id));

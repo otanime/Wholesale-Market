@@ -19,25 +19,25 @@ import ma.sic.mg.personnel.repository.IPersonnelRep;
 
 
 @RestController
-@RequestMapping("personnes")
+@RequestMapping("api/personnels")
 @CrossOrigin(origins = "http://localhost:4200")  
 public class PersonneController {
 	@Autowired
 	private IPersonnelRep PersonneRepository;
 	
-	@GetMapping("/all")
+	@GetMapping("")
 	public List<Personne> findAll(){
 		return  PersonneRepository.findAll();
 	}
-	@GetMapping("/find/{id}")
+	@GetMapping("/{id}")
 	public Personne findPersonne(@PathVariable(required = true) String id){
 		return PersonneRepository.findById(Integer.parseInt(id));
 	}
-	@PostMapping("/save")
+	@PostMapping("")
 	public void save(@RequestBody Personne Mandataire) {
 		PersonneRepository.save(Mandataire);
 	}
-	@DeleteMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable(required = true) String id){
 		System.out.println("id = "+id);
 		Personne Personne=PersonneRepository.findById(Integer.parseInt(id));

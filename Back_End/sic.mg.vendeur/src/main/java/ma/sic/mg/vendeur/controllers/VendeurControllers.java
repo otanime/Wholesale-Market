@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.RestController;
 import ma.sic.mg.vendeur.entities.Vendeur;
 import ma.sic.mg.vendeur.repositories.IvendeurRepository;
 @RestController
-@RequestMapping("vendeurs")
+@RequestMapping("api/vendeurs")
 @CrossOrigin(origins = "http://localhost:4200")  
 public class VendeurControllers {
 	@Autowired
 	private IvendeurRepository VendeurRepository;
 	
-	@GetMapping("/all")
+	@GetMapping("")
 	public List<Vendeur> findAll(){
 		return VendeurRepository.findAll();
 	}
-	@GetMapping("/find/{id}")
+	@GetMapping("/{id}")
 	public Vendeur findVendeur(@PathVariable(required = true) String id){
 		return VendeurRepository.findById(Integer.parseInt(id));
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("")
 	public void save(@RequestBody Vendeur Vendeur) {
 		VendeurRepository.save(Vendeur);
 	}
 	
-	@DeleteMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable(required = true) String id){
 		System.out.println("id = "+id);
 		Vendeur Vendeur=VendeurRepository.findById(Integer.parseInt(id));

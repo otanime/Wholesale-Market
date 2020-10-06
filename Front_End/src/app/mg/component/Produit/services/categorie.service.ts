@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CategorieProduit } from 'src/app/mg/modules/CategorieProduit';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_URLS } from 'src/app/mg/config/api.url.config';
 const CategorieProduitsUrl = 'http://localhost:8084/produitcategories';
 
 @Injectable({
@@ -12,21 +13,21 @@ export class CategorieService {
   constructor(private http: HttpClient) { }
   
   getCategories() {
-    return this.http.get<CategorieProduit[]>(`${CategorieProduitsUrl}/all`); 
+    return this.http.get<CategorieProduit[]>(API_URLS.CATEGORIE_PRODUIT_API); 
   }
   getcategorie(id) {
-    return this.http.get<CategorieProduit>(`${CategorieProduitsUrl}/find/${id}`);
+    return this.http.get<CategorieProduit>(API_URLS.CATEGORIE_PRODUIT_API+`/${id}`);
   }
 
   createCategorieProduit(CategorieProduit: CategorieProduit): Observable<any> {
-    return this.http.post<CategorieProduit>(CategorieProduitsUrl + '/save',CategorieProduit);
+    return this.http.post<CategorieProduit>(API_URLS.CATEGORIE_PRODUIT_API,CategorieProduit);
   }
 
   updateCategorieProduit(id, data) {
-    return this.http.put(`${CategorieProduitsUrl}/${id}` ,data);
+    return this.http.put(API_URLS.CATEGORIE_PRODUIT_API+`/${id}` ,data);
   }
 
   deleteCategorieProduit(id) {
-    return this.http.delete(`${CategorieProduitsUrl}/delete/${id}`);
+    return this.http.delete(API_URLS.CATEGORIE_PRODUIT_API+`/${id}`);
   }
 }

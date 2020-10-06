@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Vendeur } from 'src/app/mg/modules/Vendeur';
 import { Observable } from 'rxjs';
-
+import { API_URLS } from 'src/app/mg/config/api.url.config';
 const vendeursUrl = 'http://localhost:8081/vendeurs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,14 @@ export class VendeurService {
   constructor(private http: HttpClient) { }
   
   getVendeurs() {
-    return this.http.get<Vendeur[]>(`${vendeursUrl}/all`); 
+    return this.http.get<Vendeur[]>(API_URLS.VENDEUR_API); 
   }
   getVendeur(id) {
-    return this.http.get<Vendeur>(`${vendeursUrl}/find/${id}`);
+    return this.http.get<Vendeur>(API_URLS.VENDEUR_API+`/${id}`);
   }
 
   createvendeur(vendeur: Vendeur): Observable<any> {
-    return this.http.post<Vendeur>(vendeursUrl + '/save',vendeur);
+    return this.http.post<Vendeur>(API_URLS.VENDEUR_API,vendeur);
   }
 
   updateVendeur(id, data) {
@@ -28,7 +29,7 @@ export class VendeurService {
   }
 
   deleteVendeur(id) {
-    return this.http.delete(`${vendeursUrl}/delete/${id}`);
+    return this.http.delete(API_URLS.VENDEUR_API+`/${id}`);
   }
 
 }

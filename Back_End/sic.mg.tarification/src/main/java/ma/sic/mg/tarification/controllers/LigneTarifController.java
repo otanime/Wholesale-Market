@@ -22,14 +22,14 @@ import ma.sic.mg.tarification.entities.Tarification;
 import ma.sic.mg.tarification.repositories.LigneTarificationRep;
 
 @RestController
-@RequestMapping("tarifs")
+@RequestMapping("api/lignetarifs")
 @CrossOrigin(origins = "http://localhost:4200")  
 public class LigneTarifController {
 
 	@Autowired
 	private LigneTarificationRep LigneTarifRep;
 	
-	@GetMapping("/all")
+	@GetMapping("")
 	public List<LigneTarification> findAll(){
 		return LigneTarifRep.findAll();
 	}
@@ -42,7 +42,7 @@ public class LigneTarifController {
 		return LigneTarifRep.findByLigneID(pk);
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("")
 	public void save(@RequestBody  final LigneTarification  LigneTarification) {
 		List<LigneTarification> ll = new  ArrayList<LigneTarification>();
 		LigneTarification lt = new LigneTarification();

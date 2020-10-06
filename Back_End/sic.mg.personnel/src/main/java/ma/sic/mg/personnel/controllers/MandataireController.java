@@ -18,27 +18,27 @@ import ma.sic.mg.personnel.repository.IMandataireRep;
 
 
 @RestController
-@RequestMapping("mandataires")
+@RequestMapping("api/mandataires")
 @CrossOrigin(origins = "http://localhost:4200")  
 public class MandataireController {
 	@Autowired
 	private IMandataireRep MandataireRepository;
 	
-	@GetMapping("/all")
+	@GetMapping("")
 	public List<Mandataire> findAll(){
 		return  MandataireRepository.findAll();
 	}
-	@GetMapping("/find/{id}")
+	@GetMapping("/{id}")
 	public Mandataire findMandataire(@PathVariable(required = true) String id){
 		return MandataireRepository.findById(Integer.parseInt(id));
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("")
 	public void save(@RequestBody Mandataire Mandataire) {
 		MandataireRepository.save(Mandataire);
 	}
 	
-	@DeleteMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable(required = true) String id){
 		System.out.println("id = "+id);
 		Mandataire Mandataire=MandataireRepository.findById(Integer.parseInt(id));

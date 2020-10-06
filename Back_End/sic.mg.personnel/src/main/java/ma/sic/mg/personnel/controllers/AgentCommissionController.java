@@ -18,27 +18,27 @@ import ma.sic.mg.personnel.repository.IAgentCommissionRep;
 
 
 @RestController
-@RequestMapping("agentcommissions")
+@RequestMapping("api/agentcommissions")
 @CrossOrigin(origins = "http://localhost:4200")  
 public class AgentCommissionController {
 	@Autowired
 	private IAgentCommissionRep AgentCommissionRepository;
 	
-	@GetMapping("/all")
+	@GetMapping("")
 	public List<AgentCommission> findAll(){
 		return (List<AgentCommission>) AgentCommissionRepository.findAll();
 	}
-	@GetMapping("/find/{id}")
+	@GetMapping("/{id}")
 	public AgentCommission findAgentCommission(@PathVariable(required = true) String id){
 		return AgentCommissionRepository.findById(Integer.parseInt(id));
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("")
 	public void save(@RequestBody AgentCommission AgentCommission) {
 		AgentCommissionRepository.save(AgentCommission);
 	}
 	
-	@DeleteMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable(required = true) String id){
 		System.out.println("id = "+id);
 		AgentCommission AgentCommission=AgentCommissionRepository.findById(Integer.parseInt(id));

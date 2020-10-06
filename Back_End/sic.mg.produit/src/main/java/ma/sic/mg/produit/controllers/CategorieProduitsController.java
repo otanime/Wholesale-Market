@@ -20,29 +20,29 @@ import ma.sic.mg.produit.repositories.ICategorieProduitRepository;
 
 
 @RestController
-@RequestMapping("produitcategories")
+@RequestMapping("api/produitcategories")
 @CrossOrigin(origins = "http://localhost:4200")  
 public class CategorieProduitsController {
 	
 	@Autowired
 	private ICategorieProduitRepository ProduitRepository;
 	
-	@GetMapping("/all")
+	@GetMapping("")
 	public List<CategorieProduit> findAll(){
 		return ProduitRepository.findAll();
 	}
-	@GetMapping("/find/{id}")
+	@GetMapping("/{id}")
 	public CategorieProduit findProduit(@PathVariable(required = true) String id){
 		return ProduitRepository.findById(Integer.parseInt(id));
 	}
 	
 	
-	@PostMapping("/save")
+	@PostMapping("")
 	public void save(@RequestBody CategorieProduit CategorieProduit) {
 		ProduitRepository.save(CategorieProduit);
 	}
 	
-	@DeleteMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable(required = true) String id){
 		System.out.println("id = "+id);
 		CategorieProduit CategorieProduit=ProduitRepository.findById(Integer.parseInt(id));
