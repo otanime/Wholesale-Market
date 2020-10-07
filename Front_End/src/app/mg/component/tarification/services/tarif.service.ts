@@ -7,10 +7,6 @@ import { LigneTarification } from 'src/app/mg/modules/LigneTarification';
 import { LigneID } from 'src/app/mg/modules/LigneTarifPk';
 import { Tarif } from 'src/app/mg/modules/Tarification';
 
-const tarifsUrl = 'http://localhost:8085/api/tarifs';
-const lignesUrl = 'http://localhost:8085/tarifs';
-const filesUrl = 'http://localhost:8085/files';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,27 +16,28 @@ export class TarifService {
 
   getTarifBLigneId(idProduit,idTarif){
     let params = new HttpParams();
-params = params.append("param1",idProduit);
-params = params.append("param2",idTarif);
-    return this.http.get<LigneTarification>(API_URLS.Ligne_Tarif_API+`/find`, {params: params})
+    params = params.append("param1",idProduit);
+    params = params.append("param2",idTarif);
+
+    return this.http.get<LigneTarification>(API_URLS.LIGNE_TARIFS_API+`/find`, {params: params})
 
   }
-  
+
   getTarifs() {
-    return this.http.get<LigneTarification[]>(API_URLS.Ligne_Tarif_API); 
+    return this.http.get<LigneTarification[]>(API_URLS.LIGNE_TARIFS_API);
   }
 
     public addTarif(lgt: Tarif): Observable<Tarif> {
-    return this.http.post<Tarif>(API_URLS.Tarifs_API,lgt);
+    return this.http.post<Tarif>(API_URLS.TARIFS_API,lgt);
   }
-  
+
   createtarif(lgt: LigneTarification): Observable<any> {
-    return this.http.post<LigneTarification>(API_URLS.Ligne_Tarif_API,lgt);
+    return this.http.post<LigneTarification>(API_URLS.LIGNE_TARIFS_API,lgt);
   }
 
   public getAllFileByTarif(TarifID : number) : Observable<any> {
 
-    return this.http.get<FileDB>(API_URLS.Tarifs_API + `/${TarifID}/file`);
+    return this.http.get<FileDB>(API_URLS.TARIFS_API + `/${TarifID}/file`);
   }
 
   // add a file to Tarif
@@ -49,18 +46,18 @@ params = params.append("param2",idTarif);
     const formdata: FormData = new FormData();
     formdata.append('file', file);
 
-    return this.http.post(API_URLS.Tarifs_API + `/${TarifID}/file`, formdata);
+    return this.http.post(API_URLS.TARIFS_API + `/${TarifID}/file`, formdata);
   }
 
   // delete a file
   public deleteFilet(id : number) : Observable<any> {
 
-    return this.http.delete(API_URLS.Tarifs_API + `/file/${id}`);
+    return this.http.delete(API_URLS.TARIFS_API + `/file/${id}`);
   }
 
   // delete all file of an Tarif
   public deleteAllFiletByTarif(TarifID : number, id : number) : Observable<any> {
 
-    return this.http.delete(API_URLS.Tarifs_API + `/${TarifID}/file`);
+    return this.http.delete(API_URLS.TARIFS_API + `/${TarifID}/file`);
   }
 }

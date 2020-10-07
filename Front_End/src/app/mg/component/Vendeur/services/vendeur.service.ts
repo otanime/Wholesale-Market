@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Vendeur } from 'src/app/mg/modules/Vendeur';
 import { Observable } from 'rxjs';
 import { API_URLS } from 'src/app/mg/config/api.url.config';
-const vendeursUrl = 'http://localhost:8081/vendeurs';
 
 
 @Injectable({
@@ -12,9 +11,9 @@ const vendeursUrl = 'http://localhost:8081/vendeurs';
 export class VendeurService {
 
   constructor(private http: HttpClient) { }
-  
+
   getVendeurs() {
-    return this.http.get<Vendeur[]>(API_URLS.VENDEUR_API); 
+    return this.http.get<Vendeur[]>(API_URLS.VENDEUR_API);
   }
   getVendeur(id) {
     return this.http.get<Vendeur>(API_URLS.VENDEUR_API+`/${id}`);

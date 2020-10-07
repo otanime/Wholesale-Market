@@ -3,16 +3,15 @@ import { Produit } from 'src/app/mg/modules/Produit';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_URLS } from 'src/app/mg/config/api.url.config';
-const ProduitsUrl = 'http://localhost:8084/produits';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService {
   constructor(private http: HttpClient) { }
-  
+
   getProducts() {
-    return this.http.get<Produit[]>(API_URLS.PRODUIT_API); 
+    return this.http.get<Produit[]>(API_URLS.PRODUIT_API);
   }
   getproduct(id) {
     return this.http.get<Produit>(API_URLS.PRODUIT_API+`/${id}`);

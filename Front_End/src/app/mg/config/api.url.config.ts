@@ -51,9 +51,9 @@ export const API_URLS = {
   TYPE_PRODUIT_API: BASE + ':' + PORT_MS_PRODUIT + '/' + PATH + '/typeproduits',
   CATEGORIE_PRODUIT_API: BASE + ':' + PORT_MS_PRODUIT + '/' + PATH + '/produitcategories',
 
-// Tarification MS 
-Ligne_Tarif_API: BASE + ':' + PORT_MS_TARIFICATION + '/' + PATH + '/lignetarifs',
-Tarifs_API: BASE + ':' + PORT_MS_TARIFICATION + '/' + PATH + '/tarifs',
+  // Tarification MS
+  LIGNE_TARIFS_API: BASE + ':' + PORT_MS_TARIFICATION + '/' + PATH + '/lignetarifs',
+  TARIFS_API: BASE + ':' + PORT_MS_TARIFICATION + '/' + PATH + '/tarifs',
 
 
 
