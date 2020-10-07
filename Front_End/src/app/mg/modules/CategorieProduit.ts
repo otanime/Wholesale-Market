@@ -1,7 +1,7 @@
 import { TypeProduit } from './TypeProduit';
 
 export class CategorieProduit {
-  idProductCategory : Number
+  idProductCategory : number
 libProductCategory : String
  typeProduits: TypeProduit[];
 }

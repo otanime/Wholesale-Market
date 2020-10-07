@@ -1,0 +1,22 @@
+<form class="myForm">
+
+    <div class="form-group">
+        <label for="name">libelle</label>
+        <input type="text" class="form-control" style="text-transform: uppercase;" value="{{hangar?.libelle}}" readonly>
+    </div>
+    <div class="form-group">
+        <label for="name"> categorie d'hangar</label>
+        <input type="text" class="form-control" style="text-transform: uppercase;"
+            value="{{hangar?.categorieProduit.libProductCategory}}" readonly>
+    </div>
+
+    <div class="form-group">
+        <label for="name">description</label>
+        <textarea name="name" rows="2" cols="80" class="form-control" style="text-transform: capitalize;"
+            value="{{hangar?.description}}" readonly></textarea>
+    </div>
+
+
+
+
+</form>

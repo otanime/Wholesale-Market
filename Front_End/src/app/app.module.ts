@@ -59,6 +59,10 @@ import { CategorieproduitFormComponent } from './mg/component/Produit/categoriep
 import { TarificationFormComponent } from './mg/component/tarification/tarification-form/tarification-form.component';
 import { TarificationListComponent } from './mg/component/tarification/tarification-list/tarification-list.component';
 import { TarificationDetailComponent } from './mg/component/tarification/tarification-detail/tarification-detail.component';
+import { AddHangarComponent } from './mg/component/hangar/add-hangar/add-hangar.component';
+import { HangarDetailsComponent } from './mg/component/hangar/hangar-details/hangar-details.component';
+import { HangarListComponent } from './mg/component/hangar/hangar-list/hangar-list.component';
+import { UpdateHangarComponent } from './mg/component/hangar/update-hangar/update-hangar.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +121,11 @@ import { TarificationDetailComponent } from './mg/component/tarification/tarific
     EvenementDetailsComponent,
     TarificationFormComponent,
     TarificationListComponent,
-    TarificationDetailComponent
+    TarificationDetailComponent,
+    HangarListComponent,
+    AddHangarComponent,
+    HangarDetailsComponent,
+    UpdateHangarComponent
 
   ],
   imports: [
