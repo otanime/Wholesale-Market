@@ -7,11 +7,6 @@ import { AgentBalance } from 'src/app/mg/modules/AgentBalance';
 import { AgentCommission } from 'src/app/mg/modules/AgentCommission';
 import { API_URLS } from 'src/app/mg/config/api.url.config';
 
-const personesUrl = 'http://localhost:8082/personnes';
-const MandatairesUrl = 'http://localhost:8082/mandataires';
-const AgentCommisionUrl = 'http://localhost:8082/agentcommissions';
-const AgentBalanceUrl = 'http://localhost:8082/agentbalances';
-
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +17,13 @@ export class PersonneService {
 
 
   getPersonnes() {
-    return this.http.get<Personne[]>(API_URLS.PERSONNEL_API); 
+    return this.http.get<Personne[]>(API_URLS.PERSONNEL_API);
   }
   getPersonne(id) {
     return this.http.get<Personne>(API_URLS.PERSONNEL_API+`/${id}`);
   }
   getAgentsComissions() {
-    return this.http.get<AgentCommission[]>(API_URLS.AGENTCOMMISSIONS_API); 
+    return this.http.get<AgentCommission[]>(API_URLS.AGENTCOMMISSIONS_API);
   }
 
   createmandataire(mandataire: Mandataire): Observable<any> {
@@ -55,7 +50,7 @@ export class PersonneService {
     return this.http.delete(API_URLS.PERSONNEL_API+`/${id}`);
   }
 
-  
+
 
 
 }
