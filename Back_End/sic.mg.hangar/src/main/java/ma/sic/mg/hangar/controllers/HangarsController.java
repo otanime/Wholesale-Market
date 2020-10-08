@@ -17,11 +17,11 @@ import ma.sic.mg.hangar.repositories.IhangarRepository;
 
 @RestController
 @RequestMapping("api/hangars")
-@CrossOrigin(origins = "http://localhost:4200")  
+@CrossOrigin(origins = "http://localhost:4200")
 public class HangarsController {
 	@Autowired
 	private IhangarRepository hangarRepository;
-	
+
 	@GetMapping("")
 	public List<Hangar> findAll(){
 		return hangarRepository.findAll();
@@ -34,20 +34,19 @@ public class HangarsController {
 	public List<Hangar> findhangarBycategory(@PathVariable(required = true) String id){
 		return hangarRepository.findByCategorieProduit(Integer.parseInt(id));
 	}
-	
-	
+
 	@PostMapping("")
 	public void save(@RequestBody Hangar hangar) {
 		hangarRepository.save(hangar);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable(required = true) String id){
 		System.out.println("id = "+id);
 		Hangar hangar=hangarRepository.findById(Integer.parseInt(id));
-		hangarRepository.delete(hangar);	
+		hangarRepository.delete(hangar);
 	}
 
-	
+
 
 }

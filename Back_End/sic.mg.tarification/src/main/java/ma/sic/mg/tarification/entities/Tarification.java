@@ -17,11 +17,14 @@ public class Tarification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTarif;
+
 	private String status;
 	private double prix;
-	 @OneToMany(mappedBy = "tarif", cascade = CascadeType.ALL)
-	  private  List<FileDB> pj;
-	  @OneToMany(mappedBy = "tarif")
-		private List<LigneTarification> listligneTarif;
+
+ 	@OneToMany(mappedBy = "tarif", cascade = CascadeType.ALL)
+	private  List<FileDB> pj;
+
+ 	@OneToMany(mappedBy = "tarif")
+	private List<LigneTarification> listligneTarif;
 
 }

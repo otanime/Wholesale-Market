@@ -60,4 +60,11 @@ export class TarifService {
 
     return this.http.delete(API_URLS.TARIFS_API + `/${TarifID}/file`);
   }
+
+  // get a tarif for a product
+  public getCurrentProductTarif(produitID : number): Observable<any> {
+
+    return this.http.get(API_URLS.LIGNE_TARIFS_API + `/${produitID}/tarif`);
+  }
+
 }

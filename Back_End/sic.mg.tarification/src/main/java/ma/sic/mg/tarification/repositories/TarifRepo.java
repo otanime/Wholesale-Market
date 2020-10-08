@@ -10,4 +10,5 @@ public interface TarifRepo extends JpaRepository<Tarification,Integer>   {
 	
 
     Tarification findById(int id);
+
 }

@@ -1,0 +1,184 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+
+
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">DashBoared</a></li>
+                    <li class="breadcrumb-item active">{{componentName}}</li>
+                </ol>
+            </div>
+        </div>
+        <div class="alert alert-success alert-dismissible" *ngIf="message">
+          <button type="butto
+          n" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h5><i class="icon fas fa-check"></i> Alert!</h5>
+          {{message}}
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> <b> Gestion de {{componentName}} </b></h3>
+
+            <div class="card-tools">
+              <a class="btn btn-header btn-action" data-toggle="modal" data-target=".add-pesage">
+                  <i class="fas fa-plus"></i>
+              </a>
+            </div>
+        </div>
+        <div class="card-body p-0" style="display: block;">
+            <table class="table myTable" id="myDataTable" [hidden]="!pesages.length > 0">
+                <thead>
+                    <tr>
+                        <th class="text-center" >
+                            #
+                        </th>
+                        <th class="text-center">
+                            Pesage le
+                        </th>
+                        <th class="text-center">
+                            Vehicule
+                        </th>
+                        <th class="text-center">
+                          conducteur
+                        </th>
+                        <th class="text-center">
+                            vendeur
+                        </th>
+
+                        <th class="text-center" >
+                            <i class="fas fa-cog"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pesage of pesages;">
+                      <th class="text-center" >
+                        {{pesage.id}}
+                      </th>
+                      <td class="text-center" >
+                        {{pesage.dateDeclaration | date :'dd/MM/yyyy HH:mm'}}
+                      </td>
+                      <td class="text-center" >
+                        {{pesage.vehiculeMatricule | uppercase}}
+                      </td>
+                      <td class="text-center" >
+                        {{pesage.conducteurCin | uppercase}}
+                      </td>
+                      <td class="text-center" >
+                        {{pesage.vendeurCin | uppercase}}
+                      </td>
+
+                      <td class="project-actions text-center">
+                          <a class="btn btn-action-view btn-action"
+                          (click)="selectedPesage = pesage"
+                          data-toggle="modal" data-target=".show-pesage">
+                              <i class="fas fa-eye"></i>
+                          </a>
+                          <a class="btn btn-action-edit btn-action"
+                          (click)="selectedPesage = pesage"
+                          data-toggle="modal" data-target=".edit-pesage">
+                              <i class="fas fa-edit"></i>
+                          </a>
+                          <a class="btn btn-action-delete btn-action"
+                          (click)="selectedPesage = pesage"
+                          data-toggle="modal" data-target=".delete-pesage">
+                              <i class="fas fa-trash"></i>
+                          </a>
+                      </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+
+<!-- add pesage -->
+<div class="modal fade add-pesage myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel"> {{ "nouveau " + componentName | uppercase }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <app-add-pesage
+                (isClosed)="loadData($event)"
+                ></app-add-pesage>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin add pesage -->
+
+<!-- show pesage -->
+<div class="modal fade show-pesage myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">AFFICHER LES INFORMATIONS DE <span>{{ selectedPesage?.id }}</span> LE <span>{{ selectedPesage?.dateDeclaration | date :'dd/MM/yyyy HH:mm' }}</span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+              <app-pesage-details
+
+                (isClosed)="loadData($event)"
+                [pesage]="selectedPesage">
+              </app-pesage-details>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin show pesage -->
+
+<!-- update pesage -->
+<div class="modal fade edit-pesage myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">MODIFIER LES INFORMATIONS DE <span>{{ selectedPesage?.id }}</span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+              <!-- <app-update-pesage
+
+                (isClosed)="loadData($event)"
+                [pesage]="selectedPesage">
+
+              </app-update-pesage> -->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin update pesage -->
+
+<!-- delete pesage -->
+<div class="modal fade delete-pesage myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">SUPPRIMER <span>{{ selectedPesage?.id }}</span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+
+              <h4 class="delete-msg">Voulez-vous vraiment supprimer le pesage ?!</h4>
+              <input [(ngModel)]="deleteConfirmation" type="text"  parsley-trigger="change" required="" placeholder="confirmez la supprission en saisissant 'YES'" class="form-control delete-confirmation">
+
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="deleteConfirmation.toUpperCase() != 'YES'"
+                (click)="deletePesage()" type="button" class="btn btn-delete waves-effect waves-light">Supprimer</button>
+                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Anuller</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin delete pesage -->

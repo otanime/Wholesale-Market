@@ -24,7 +24,7 @@ export class VendeurService {
   }
 
   updateVendeur(id, data) {
-    return this.http.put(`${vendeursUrl}/${id}` ,data);
+    return this.http.put(API_URLS.VENDEUR_API + `/${id}` ,data);
   }
 
   deleteVendeur(id) {

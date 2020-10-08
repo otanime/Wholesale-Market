@@ -7,11 +7,14 @@ const PORT_MS_CONDUCTEUR = '9001'
 const PORT_MS_VEHICULE = '9002'
 const PORT_MS_EMBALLAGE = '9003'
 const PORT_MS_EVENEMENT = '9004'
-const PORT_MS_VENDEUR = '8081'
-const PORT_MS_TARIFICATION = '8085'
-const PORT_MS_PERSONNEL = '8082'
-const PORT_MS_PRODUIT = '8084'
-const PORT_MS_HANGAR = '8086'
+
+const PORT_MS_TARIFICATION = '9005'
+const PORT_MS_VENDEUR = '9006'
+const PORT_MS_PRODUIT = '9007'
+const PORT_MS_PERSONNEL = '9008'
+const PORT_MS_HANGAR = '9009'
+
+const PORT_MS_BALLANCE = '9010'
 
 
 
@@ -45,6 +48,7 @@ export const API_URLS = {
   AGENTBALACE_API: BASE + ':' + PORT_MS_PERSONNEL + '/' + PATH + '/agentbalances',
   MANDATAIRE_API: BASE + ':' + PORT_MS_PERSONNEL + '/' + PATH + '/mandataires',
   AGENTCOMMISSIONS_API: BASE + ':' + PORT_MS_PERSONNEL + '/' + PATH + '/agentcommissions',
+
   // Produit  MS
   PRODUIT_API: BASE + ':' + PORT_MS_PRODUIT + '/' + PATH + '/produits',
   SOUSTYPE_PRODUIT_API: BASE + ':' + PORT_MS_PRODUIT + '/' + PATH + '/soustypesproduits',
@@ -55,6 +59,8 @@ export const API_URLS = {
   LIGNE_TARIFS_API: BASE + ':' + PORT_MS_TARIFICATION + '/' + PATH + '/lignetarifs',
   TARIFS_API: BASE + ':' + PORT_MS_TARIFICATION + '/' + PATH + '/tarifs',
 
+  // Ballance MS
+  BALLANCE_API : BASE + ':' + PORT_MS_BALLANCE + '/' + PATH + '/pesages'
 
 
 };

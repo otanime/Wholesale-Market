@@ -26,6 +26,11 @@ export class PersonneService {
     return this.http.get<AgentCommission[]>(API_URLS.AGENTCOMMISSIONS_API);
   }
 
+  getAgentsBalance() {
+    return this.http.get<AgentBalance[]>(API_URLS.AGENTBALACE_API);
+  }
+
+
   createmandataire(mandataire: Mandataire): Observable<any> {
     return this.http.post<Mandataire>(API_URLS.MANDATAIRE_API,mandataire);
   }

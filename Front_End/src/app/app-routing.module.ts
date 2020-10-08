@@ -33,6 +33,9 @@ import { TarificationListComponent } from './mg/component/tarification/tarificat
 import { TarificationFormComponent } from './mg/component/tarification/tarification-form/tarification-form.component';
 import { TarificationDetailComponent } from './mg/component/tarification/tarification-detail/tarification-detail.component';
 
+// Balance MS
+import { PesageListComponent } from './mg/component/balance/pesage/pesage-list/pesage-list.component';
+
 
 
 const routes: Routes = [
@@ -57,7 +60,7 @@ const routes: Routes = [
   {path: 'tarifs/add/:id',component : TarificationFormComponent},
   {path: 'tarifs/list',component : TarificationListComponent},
   {path: 'tarifs/view',component : TarificationDetailComponent},
-  
+
     // Conducteur MS
     {path: 'conducteurs',component : ConducteurListComponent},
 
@@ -73,6 +76,10 @@ const routes: Routes = [
     // Evenement MS
     {path: 'evenements',component : EvenementListComponent},
     {path: 'evenements/types',component : TypeEvenementListComponent},
+
+    // Balance MS
+    {path: 'pesages',component : PesageListComponent},
+
 
 ]},
   {path: 'test',component : TestComponent},

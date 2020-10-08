@@ -1,0 +1,184 @@
+<form [formGroup]="pesageForm" class="myForm">
+
+
+  <div class="form-row">
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">agent de Ballance</label>
+      <select class="form-control mySelect" data-select="agentBallance">
+        <option *ngFor="let option of agentBalances" [value]="option.cin">[ {{ option.matrecule }} ] : {{ option.nom + ' ' + option.prenom | uppercase}}</option>
+      </select>
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.agentBallance.invalid && (pesageForm.controls.agentBallance.touched || pesageForm.controls.agentBallance.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">conducteur</label>
+      <select class="form-control mySelect" data-select="conducteurCin">
+        <option *ngFor="let option of conducteurs" [value]="option.cin">[ {{ option.cin }} ] : {{ option.nom + ' ' + option.prenom | uppercase}}</option>
+      </select>
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.conducteurCin.invalid && (pesageForm.controls.conducteurCin.touched || pesageForm.controls.conducteurCin.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">vendeur</label>
+      <select class="form-control mySelect" data-select="vendeurCin">
+        <option *ngFor="let option of vendeurs" [value]="option.cin">[ {{ option.cin }} ] : {{ option.nom + ' ' + option.prenom | uppercase}}</option>
+      </select>
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.vendeurCin.invalid && (pesageForm.controls.vendeurCin.touched || pesageForm.controls.vendeurCin.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">produit</label>
+      <select class="form-control mySelect" data-select="produit">
+        <option *ngFor="let option of produits" [value]="option.idProduit">{{ option.libelle }} </option>
+      </select>
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.hangar.invalid && (pesageForm.controls.hangar.touched || pesageForm.controls.hangar.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">type Produit</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{selectedProduit?.sousTypeProduit.typeProduit.libtypeProduit}}" readonly>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">sous Type Produit</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{selectedProduit?.sousTypeProduit.libelle}}" readonly>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">prix Reference</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" formControlName="prixReference" readonly>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">provenance</label>
+      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="provenance" placeholder="ex : Marrakech">
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.provenance.invalid && (pesageForm.controls.provenance.touched || pesageForm.controls.provenance.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">Vehicule</label>
+      <select class="form-control mySelect" data-select="vehiculeMatricule">
+        <option *ngFor="let option of vehicules" [value]="option.matricule">{{ option.typeVehicule.type }} | {{ option.matricule }} </option>
+      </select>
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.vehiculeMatricule.invalid && (pesageForm.controls.vehiculeMatricule.touched || pesageForm.controls.vehiculeMatricule.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">poid Vide (Kg)</label>
+      <input type="number" class="form-control text-center" style="text-transform: uppercase;" formControlName="poidVideVehicule" min="1" placeholder="ex : 1250 Kg" (change)="onChangePoidsVide($event.target.value)">
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.poidVideVehicule.invalid && (pesageForm.controls.poidVideVehicule.touched || pesageForm.controls.poidVideVehicule.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">poids total (Kg)</label>
+      <input type="number" class="form-control text-center" style="text-transform: uppercase;" formControlName="poidsTotal" min="1" placeholder="ex : 1250 Kg" (change)="onChangePoidsTotal($event.target.value)">
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.poidsTotal.invalid && (pesageForm.controls.poidsTotal.touched || pesageForm.controls.poidsTotal.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-4 text-center">
+      <label for="name">emballage</label>
+      <select class="form-control mySelect" data-select="emballage">
+        <option *ngFor="let option of emballages" [value]="option.id">{{ option.libelle }}</option>
+      </select>
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.emballage.invalid && (pesageForm.controls.emballage.touched || pesageForm.controls.emballage.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+
+  </div>
+
+  <hr>
+
+  <div class="form-row">
+
+
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name"><small>poids Moyen</small></label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{selectedEmballage?.poidsMoyen}} Kg" readonly>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name"><small>poids Embarque</small></label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{selectedEmballage?.poidsMoyenEmbarque}} Kg" readonly>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">nombre Unite</label>
+      <input type="number" class="form-control text-center" style="text-transform: uppercase;" formControlName="nombreUnite" readonly>
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.nombreUnite.invalid && (pesageForm.controls.nombreUnite.touched || pesageForm.controls.nombreUnite.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">poids Emballage</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" formControlName="poidsEmballage" readonly>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">poids brut (Kg)</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{ poidsBrut }}" readonly>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">poids Net (Kg)</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" formControlName="poidsNet" readonly>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">hangar</label>
+      <select class="form-control mySelect" data-select="hangar" controlName="hangar">
+        <option *ngFor="let option of hangars" [value]="option.id">{{ option.nom }} </option>
+      </select>
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.hangar.invalid && (pesageForm.controls.hangar.touched || pesageForm.controls.hangar.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-4 text-center">
+    </div>
+
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">montant Total</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" formControlName="montantTotal" readonly>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">taxe</label>
+      <input type="number" class="form-control text-center" style="text-transform: uppercase;" formControlName="taxe" min="0" step="0.10" max="100" placeholder="ex = 12,25" (change)="onChangeTaxe($event.target.value)">
+      <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.taxe.invalid && (pesageForm.controls.taxe.touched || pesageForm.controls.taxe.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">taxe Payer</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" formControlName="taxePayer" readonly>
+    </div>
+
+  </div>
+
+
+
+  <button
+
+  [disabled]="pesageForm.pristine || pesageForm.invalid || pesageForm.controls.errors"
+    type="submit" class="btn btn-form-submit"
+    (click)="addPesage()"
+    >Enregistrer</button>
+
+</form>

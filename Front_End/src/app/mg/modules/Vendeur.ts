@@ -5,5 +5,8 @@ export class Vendeur {
     private  tel : String;
     private  adresse : String;
     private patente : number;
- 
+    cin : string;
+
+
+
  }

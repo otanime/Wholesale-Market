@@ -17,17 +17,24 @@ import lombok.Data;
 @Data
 @Entity
 public class LigneTarification {
+
 	@EmbeddedId
 	private LigneTarifPK  ligneID ;
+
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
+
 	@Temporal(TemporalType.DATE)
 	private Date dateFin;
+
 	@Temporal(TemporalType.DATE)
 	private Date dateModification;
+
 	private Double oldPrix;
+
 	@Column(name = "AgentCommissionID")
 	private int idAgentCommission ;
+
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"listligneTarif"} )
 	private Tarification tarif ;

@@ -59,6 +59,10 @@ import { CategorieproduitFormComponent } from './mg/component/Produit/categoriep
 import { TarificationFormComponent } from './mg/component/tarification/tarification-form/tarification-form.component';
 import { TarificationListComponent } from './mg/component/tarification/tarification-list/tarification-list.component';
 import { TarificationDetailComponent } from './mg/component/tarification/tarification-detail/tarification-detail.component';
+import { UpdatePesageComponent } from './mg/component/balance/pesage/update-pesage/update-pesage.component';
+import { AddPesageComponent } from './mg/component/balance/pesage/add-pesage/add-pesage.component';
+import { PesageListComponent } from './mg/component/balance/pesage/pesage-list/pesage-list.component';
+import { PesageDetailsComponent } from './mg/component/balance/pesage/pesage-details/pesage-details.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +121,11 @@ import { TarificationDetailComponent } from './mg/component/tarification/tarific
     EvenementDetailsComponent,
     TarificationFormComponent,
     TarificationListComponent,
-    TarificationDetailComponent
+    TarificationDetailComponent,
+    UpdatePesageComponent,
+    AddPesageComponent,
+    PesageListComponent,
+    PesageDetailsComponent
 
   ],
   imports: [

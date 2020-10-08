@@ -1,0 +1,194 @@
+<form class="myForm">
+
+
+  <div class="form-row">
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">agent de Ballance</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{selectedAgentBalance?.matrecule}} | {{selectedAgentBalance?.nom}} {{selectedAgentBalance?.prenom}}" readonly>
+    </div>
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">vehicule</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{selectedVehicule?.matricule}} | {{selectedVehicule?.typeVehicule?.type}}" readonly>
+    </div>
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">conducteur</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{selectedConducteur?.cin}} | {{selectedConducteur?.nom}} {{selectedConducteur?.prenom}}" readonly>
+    </div>
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">vendeur</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{selectedVendeur?.cin}} | {{selectedVendeur?.nom}} {{selectedVendeur?.prenom}}" readonly>
+    </div>
+
+
+  </div>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">Hangar</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{pesage?.hangar}}" readonly>
+    </div>
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">typeProduit</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{selectedTypeproduit?.libtypeProduit}}" readonly>
+    </div>
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">sousTypeProduit</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{selectedSousTypeProduit?.libelle}}" readonly>
+    </div>
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">provenance</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{pesage?.provenance}}" readonly>
+    </div>
+
+
+  </div>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">emballage</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{selectedEmballage?.libelle}}" readonly>
+    </div>
+
+    <div class="form-group col-md-1 text-center">
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">nombreUnite</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{pesage?.nombreUnite}}" readonly>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">poidsEmballage</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{pesage?.poidsEmballage}}" readonly>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">poidsTotal</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{pesage?.poidsTotal}}" readonly>
+    </div>
+
+    <div class="form-group col-md-2 text-center">
+      <label for="name">poidsNet</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{pesage?.poidsNet}}" readonly>
+    </div>
+
+
+  </div>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">prixReference</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{pesage?.prixReference}}" readonly>
+    </div>
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">montantTotal</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{pesage?.montantTotal}}" readonly>
+    </div>
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">taxe</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{pesage?.taxe}}" readonly>
+    </div>
+
+    <div class="form-group col-md-3 text-center">
+      <label for="name">taxePayer</label>
+      <input type="text" class="form-control text-center" style="text-transform: uppercase;" value="{{pesage?.taxePayer}}" readonly>
+    </div>
+
+  </div>
+
+  <label class="myLabel" data-toggle="modal" data-target=".add-sousTypeEmballages" >ajouter un nouveau file</label>
+
+
+  <table *ngIf="files?.length > 0" class="table myTable">
+      <tbody>
+          <tr>
+
+            <th class="text-center" [attr.rowspan]="files?.length * 2">
+              les pieces jointes
+            </th>
+
+          </tr>
+          <tr *ngFor="let file of files;">
+
+            <td class="text-center" >
+              {{file?.name | uppercase}}
+            </td>
+            <td class="project-actions text-center">
+
+                <a class="btn btn-action-edit btn-action"
+                href="{{file?.url}}"
+                title="{{ file?.size | number }} MB">
+                  <i class="fas fa-download"></i>
+                </a>
+
+                <a class="btn btn-action-delete btn-action"
+                (click)="selectedFile = file"
+                data-toggle="modal" data-target=".delete-file">
+                    <i class="fas fa-trash"></i>
+                </a>
+
+            </td>
+          </tr>
+      </tbody>
+  </table>
+
+</form>
+
+<!-- add File -->
+<div class="modal fade add-sousTypeEmballages myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+
+              <form class="myForm">
+
+                <div class="input-group">
+                  <input type="file" class="form-control myFile" (change)="selectFile($event)">
+                  <div class="input-group-append">
+                    <span class="input-group-text myFileButton" (click)="uploadFile()" >Upload</span>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin add File -->
+
+
+<!-- delete file -->
+<div class="modal fade delete-file myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">supprission de file</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+
+              <h4 class="delete-msg">Voulez-vous vraiment supprimer ce file ?!</h4>
+              <input [(ngModel)]="deleteConfirmation" type="text"  parsley-trigger="change" required="" placeholder="confirmez la supprission en saisissant 'YES'" class="form-control delete-confirmation">
+
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="deleteConfirmation.toUpperCase() != 'YES'"
+                (click)="deleteFile()" type="button" class="btn btn-delete waves-effect waves-light">Supprimer</button>
+                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Anuller</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin delete file -->

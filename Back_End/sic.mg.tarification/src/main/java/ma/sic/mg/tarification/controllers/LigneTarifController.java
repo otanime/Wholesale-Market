@@ -83,8 +83,27 @@ public class LigneTarifController {
 			
 	
 	}
-	
-	
+
+
+	@GetMapping("/{produit_id}/tarif")
+	public Tarification findById(@PathVariable(required = true) String produit_id ){
+
+		List<LigneTarification> lineTarificationList = LigneTarifRep.findByLigneID_IdProduit(Integer.parseInt(produit_id));
+		
+		for ( LigneTarification  ligneTarification : lineTarificationList ) {
+
+
+			if (ligneTarification.getTarif().getStatus().equals("CONFIMER")){
+
+				return ligneTarification.getTarif();
+
+			}
+		}
+
+		return null;
+
+
+	}
 	
 	
 /*	@DeleteMapping(value = "/delete/{id}")
