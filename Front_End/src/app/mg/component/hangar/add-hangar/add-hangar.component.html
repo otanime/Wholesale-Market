@@ -1,0 +1,34 @@
+
+<form [formGroup]="HangarForm" class="myForm">
+
+    <div class="form-group">
+      <label for="name">libelle</label>
+      <input type="text" class="form-control" formControlName="libelle" placeholder="ex :  Fruit " required style="text-transform: uppercase;">
+      <p class="small alert-danger msg-error" *ngIf="HangarForm.controls.libelle.invalid && (HangarForm.controls.libelle.touched || HangarForm.controls.libelle.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+  
+    <div class="form-group">
+      <label for="name">description</label>
+      <textarea name="name" rows="2" cols="80"class="form-control" formControlName="description" placeholder="ex : Hangar fruit  est un nouveau Hangar" required style="text-transform: capitalize;"></textarea>
+      <p class="small alert-danger msg-error" *ngIf="HangarForm.controls.description.invalid && (HangarForm.controls.description.touched || HangarForm.controls.description.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+    <div class="form-group">
+      <label for="name"> Categorie d'Hangar</label>
+      <select class="form-control" formControlName="categorieHangar" (change)="onSelectCategorieHangar($event.target.value)">
+        <option *ngFor="let option of categories" [value]="option.idProductCategory" >{{ option.libProductCategory }}</option>
+      </select>
+      <p class="small alert-danger msg-error" *ngIf="HangarForm.controls.categorieHangar.invalid && (HangarForm.controls.categorieHangar.touched || HangarForm.controls.categorieHangar.dirty)">Ce champ est null ou mal saisi</p>
+    </div>
+
+  
+  
+  
+    <button
+  
+      type="submit" class="btn btn-form-submit"
+      [disabled]="HangarForm.pristine || HangarForm.invalid || HangarForm.controls.errors"
+      (click)="addHangar()"
+      >Enregistrer</button>
+  
+  </form>
+  

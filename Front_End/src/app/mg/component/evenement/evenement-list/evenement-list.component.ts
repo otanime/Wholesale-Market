@@ -5,7 +5,6 @@ import { EvenementService } from "../evenement.service";
 
 declare var $ :any;
 
-import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
 
@@ -35,7 +34,7 @@ export class EvenementListComponent implements OnInit {
         "bLengthChange" : false,
         "bInfo":false,
       })
-      
+
     });
 
   }

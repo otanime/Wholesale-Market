@@ -64,6 +64,11 @@ import { AddPesageComponent } from './mg/component/balance/pesage/add-pesage/add
 import { PesageListComponent } from './mg/component/balance/pesage/pesage-list/pesage-list.component';
 import { PesageDetailsComponent } from './mg/component/balance/pesage/pesage-details/pesage-details.component';
 
+import { AddHangarComponent } from './mg/component/hangar/add-hangar/add-hangar.component';
+import { HangarDetailsComponent } from './mg/component/hangar/hangar-details/hangar-details.component';
+import { HangarListComponent } from './mg/component/hangar/hangar-list/hangar-list.component';
+import { UpdateHangarComponent } from './mg/component/hangar/update-hangar/update-hangar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -122,11 +127,15 @@ import { PesageDetailsComponent } from './mg/component/balance/pesage/pesage-det
     TarificationFormComponent,
     TarificationListComponent,
     TarificationDetailComponent,
+
     UpdatePesageComponent,
     AddPesageComponent,
     PesageListComponent,
-    PesageDetailsComponent
-
+    PesageDetailsComponent,
+    HangarListComponent,
+    AddHangarComponent,
+    HangarDetailsComponent,
+    UpdateHangarComponent,
   ],
   imports: [
     BrowserModule,
