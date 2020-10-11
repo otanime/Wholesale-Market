@@ -29,6 +29,9 @@ import { EmballageService } from "../../../emballage/emballage.service";
 import { Tarif } from "../../../../modules/Tarification";
 import { TarifService } from "../../../tarification/services/tarif.service";
 
+import { Hangarbase as Hangar } from "../../../../modules/Hangar";
+import { HangarService } from "../../../hangar/services/hangar.service";
+
 declare var $ :any;
 
 @Component({
@@ -39,7 +42,6 @@ declare var $ :any;
 export class AddPesageComponent implements OnInit {
 
   @Output() isClosed = new EventEmitter<boolean>();
-
 
   pesageForm :  FormGroup
 
@@ -68,8 +70,8 @@ export class AddPesageComponent implements OnInit {
   tarif : Tarif
 
 
-  hangars : []
-
+  hangars : Hangar[]
+  selectedHangar : Hangar
 
   poidsBrut : number
 
@@ -84,6 +86,7 @@ export class AddPesageComponent implements OnInit {
     // private typeproduitService : TypeproduitService,
     private emballageService : EmballageService,
     private tarifService : TarifService,
+    private hangarService : HangarService,
     private form: FormBuilder,
 
   ) {
@@ -97,6 +100,7 @@ export class AddPesageComponent implements OnInit {
       conducteurCin: ['', Validators.compose([Validators.required])],
       vendeurCin: ['', Validators.compose([Validators.required])],
 
+      produit: ['', Validators.compose([Validators.required])],
       typeProduit: ['', Validators.compose([Validators.required])],
       sousTypeProduit: [],
 
@@ -118,8 +122,6 @@ export class AddPesageComponent implements OnInit {
 
 
     });
-
-    this.pesageForm.controls.hangar.setValue(0)
 
 
   }
@@ -167,6 +169,20 @@ export class AddPesageComponent implements OnInit {
   }
 
   loadData(){
+
+    // Hangar
+    this.hangarService.getHangars().subscribe(
+      data => {
+
+        this.hangars = data
+        this.pesageForm.controls.hangar.setValue(this.hangars[0].numHangar)
+
+      },
+      error => {
+        console.log("error")
+      },
+      () => { console.log('hangars Data loading ... Done')}
+    );
 
     // conducteur
     this.conducteurService.getConducteurs().subscribe(
@@ -231,6 +247,7 @@ export class AddPesageComponent implements OnInit {
 
         this.produits = data
         this.onSelectProduit(this.produits[0].idProduit)
+
       },
       error => {
         console.log("error")
@@ -250,6 +267,17 @@ export class AddPesageComponent implements OnInit {
       },
       () => { console.log('emballages Data loading ... Done')}
     );
+
+
+  }
+
+  HangarByCategorie(categorieProduit){
+
+    if (!!this.hangars) {
+
+      this.selectedHangar = this.hangars.find(x => x.categorieProduit == categorieProduit)
+      this.pesageForm.controls.hangar.setValue(this.selectedHangar.numHangar)
+    }
 
   }
 
@@ -287,10 +315,13 @@ export class AddPesageComponent implements OnInit {
     this.selectedProduit = this.produits.find(x => x.idProduit == produitID)
     this.getProduitTarif(produitID)
 
-    this.pesageForm.controls.typeProduit.setValue(this.selectedProduit.sousTypeProduit.typeProduit.idtypeProduit)
+    this.selectedTypeproduit = this.selectedProduit.sousTypeProduit.typeProduit
+
+    this.pesageForm.controls.produit.setValue(this.selectedProduit.idProduit)
+    this.pesageForm.controls.typeProduit.setValue(this.selectedTypeproduit.idtypeProduit)
     this.pesageForm.controls.sousTypeProduit.setValue(this.selectedProduit.sousTypeProduit.idSousType)
 
-
+    this.HangarByCategorie(this.selectedTypeproduit.categorie.idProductCategory)
   }
 
   onSelectVehicule(vehiculeMatricule){
@@ -366,36 +397,35 @@ export class AddPesageComponent implements OnInit {
 
     const formValues = this.pesageForm.value;
 
-    console.log(formValues);
+    let pesage = new Pesage();
+
+    pesage = formValues
+
+    pesage.dateDeclaration = new Date()
 
 
-    // let pesage = new Pesage();
-    //
-    // pesage = formValues
-    //
-    // pesage.dateDeclaration = new Date()
-    //
-    // this.pesageService.addPesage(pesage).subscribe(
-    //   data => {
-    //
-    //     this.pesageForm.reset();
-    //
-    //     this.isClosed.emit(true);
-    //
-    //     $('.modal').modal('hide');
-    //
-    //     // toastr.success('Bien Ajouter', '', {
-    //     //   "positionClass": "toast-bottom-right",
-    //     //   "showDuration": "500",
-    //     // });
-    //
-    //
-    //   },
-    //   error => {
-    //     console.log("error");
-    //   },
-    //   () => { console.log('loading Done')}
-    // );
+
+    this.pesageService.addPesage(pesage).subscribe(
+      data => {
+
+        // this.pesageForm.reset();
+
+        this.isClosed.emit(true);
+
+        $('.modal').modal('hide');
+
+        // toastr.success('Bien Ajouter', '', {
+        //   "positionClass": "toast-bottom-right",
+        //   "showDuration": "500",
+        // });
+
+
+      },
+      error => {
+        console.log("error");
+      },
+      () => { console.log('loading Done')}
+    );
 
 
   }

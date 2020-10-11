@@ -6,7 +6,7 @@
     <div class="form-group col-md-4 text-center">
       <label for="name">agent de Ballance</label>
       <select class="form-control mySelect" data-select="agentBallance">
-        <option *ngFor="let option of agentBalances" [value]="option.cin">[ {{ option.matrecule }} ] : {{ option.nom + ' ' + option.prenom | uppercase}}</option>
+        <option *ngFor="let option of agentBalances" [value]="option.matrecule">[ {{ option.matrecule }} ] : {{ option.nom + ' ' + option.prenom | uppercase}}</option>
       </select>
       <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.agentBallance.invalid && (pesageForm.controls.agentBallance.touched || pesageForm.controls.agentBallance.dirty)">Ce champ est null ou mal saisi</p>
     </div>
@@ -145,7 +145,7 @@
     <div class="form-group col-md-2 text-center">
       <label for="name">hangar</label>
       <select class="form-control mySelect" data-select="hangar" controlName="hangar">
-        <option *ngFor="let option of hangars" [value]="option.id">{{ option.nom }} </option>
+        <option *ngFor="let option of hangars" [value]="option.numHangar" [disabled]="option.categorieProduit != selectedTypeproduit?.categorie.idProductCategory">{{ option.libelle }} </option>
       </select>
       <p class="small alert-danger msg-error" *ngIf="pesageForm.controls.hangar.invalid && (pesageForm.controls.hangar.touched || pesageForm.controls.hangar.dirty)">Ce champ est null ou mal saisi</p>
     </div>

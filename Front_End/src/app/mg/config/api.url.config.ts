@@ -60,7 +60,8 @@ export const API_URLS = {
   TARIFS_API: BASE + ':' + PORT_MS_TARIFICATION + '/' + PATH + '/tarifs',
 
   // Ballance MS
-  BALLANCE_API : BASE + ':' + PORT_MS_BALLANCE + '/' + PATH + '/pesages'
+  BALLANCE_API : BASE + ':' + PORT_MS_BALLANCE + '/' + PATH + '/pesages',
+  REGLEMENT_API : BASE + ':' + PORT_MS_BALLANCE + '/' + PATH + '/reglements',
 
 
 };

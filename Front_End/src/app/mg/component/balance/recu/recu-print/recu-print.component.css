@@ -1,0 +1,46 @@
+section {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 700px;
+  margin: 0 auto;
+  padding: 14px;
+  overflow: auto;
+}
+
+h2.recu-title {
+  text-align: center;
+  border: 1px solid #5fbfce;
+  color: #5fbfce;
+  font-weight: 200;
+  padding: 15px;
+}
+
+h4.recu-sous-title {
+    font-weight: 900;
+    padding: 15px;
+    text-align: left;
+}
+
+h4.recu-sous-title small {float: right;background-color: #5fbfce;color: #fff;font-weight: 900;padding: 0 19px;}
+
+table.table.myTable th, table.table.myTable td {background-color: #ffffff;text-transform: uppercase;letter-spacing: 2px;font-size: 15px;text-align: center !important;border: 1px solid;}
+
+.tempo {
+    width: 150px;
+    height: 150px;
+    border: 1px solid;
+    float: right;
+}
+
+a.recu-btn-print {
+    background-color: #5fbfce;
+    padding: 10px 17px;
+    border-radius: 100%;
+    font-size: 29px;
+    color: #fff;
+    transition: .6s;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    cursor: pointer;
+}

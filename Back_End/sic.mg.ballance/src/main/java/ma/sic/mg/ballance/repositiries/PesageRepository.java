@@ -9,4 +9,5 @@ import ma.sic.mg.ballance.entities.Pesage;
 public interface PesageRepository extends JpaRepository<Pesage, Long> {
 
 	Pesage findById(long id);
+	Pesage findByRecu_Reglement_Id(long id);
 }

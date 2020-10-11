@@ -1,0 +1,109 @@
+<a class="recu-btn-print" (click)="print()"><i class="fas fa-print"></i></a>
+<section id="recu">
+  <h2 class="recu-title">Recu N° : {{ pesage?.recu.id | number:'3.0-0' }}</h2>
+  <h4 class="recu-sous-title">
+    Pesée N° : {{ pesage?.id | number:'3.0-0' }}
+    <small>le : {{ pesage?.dateDeclaration | date :'dd/MM/yyyy HH:mm' }}</small>
+  </h4>
+  <table class="table myTable">
+    <tbody>
+
+      <tr>
+        <th class="text-center" >
+          Opérateur
+        </th>
+        <td class="text-center" >
+          {{pesage?.agentBallance.matrecule}} | {{ pesage?.agentBallance.nom }} {{ pesage?.agentBallance.prenom }}
+        </td>
+      </tr>
+
+      <tr>
+        <th class="text-center" >
+          type / sous Type marchandise
+        </th>
+        <td class="text-center" >
+          {{pesage?.typeProduit.libtypeProduit}} / {{ pesage?.sousTypeProduit.libelle }}
+        </td>
+      </tr>
+
+      <tr>
+        <th class="text-center" >
+          poids total
+        </th>
+        <td class="text-center" >
+          {{pesage?.poidsTotal}} kg
+        </td>
+      </tr>
+
+      <tr>
+        <th class="text-center" >
+          nombre d'unité d'emballage
+        </th>
+        <td class="text-center" >
+          {{pesage?.nombreUnite}}
+        </td>
+      </tr>
+
+      <tr>
+        <th class="text-center" >
+          poids de l'emballage
+        </th>
+        <td class="text-center" >
+          {{pesage?.poidsEmballage}} kg
+        </td>
+      </tr>
+
+      <tr>
+        <th class="text-center" >
+          matricule véhicule
+        </th>
+        <td class="text-center" >
+          {{pesage?.vehiculeMatricule.matricule}}
+        </td>
+      </tr>
+
+      <tr>
+        <th class="text-center" >
+          poids du véhicule à vide
+        </th>
+        <td class="text-center" >
+          {{pesage?.poidVideVehicule}} kg
+        </td>
+      </tr>
+
+      <tr>
+        <th class="text-center" >
+          montant total
+        </th>
+        <td class="text-center" >
+          {{pesage?.montantTotal |  number:'3.2-9'}}
+        </td>
+      </tr>
+
+      <tr>
+        <th class="text-center" >
+          % de la taxe
+        </th>
+        <td class="text-center" >
+          {{pesage?.taxe}} %
+        </td>
+      </tr>
+
+      <tr>
+        <th class="text-center" >
+          taxe à payer
+        </th>
+        <td class="text-center" >
+          {{pesage?.taxePayer |  number:'3.2-9'}}
+        </td>
+      </tr>
+
+
+    </tbody>
+  </table>
+
+
+  <div class="tempo">
+  </div>
+
+</section>

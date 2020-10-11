@@ -68,6 +68,8 @@ import { AddHangarComponent } from './mg/component/hangar/add-hangar/add-hangar.
 import { HangarDetailsComponent } from './mg/component/hangar/hangar-details/hangar-details.component';
 import { HangarListComponent } from './mg/component/hangar/hangar-list/hangar-list.component';
 import { UpdateHangarComponent } from './mg/component/hangar/update-hangar/update-hangar.component';
+import { RecuPrintComponent } from './mg/component/balance/recu/recu-print/recu-print.component';
+import { ReglementValidationComponent } from './mg/component/balance/reglement/reglement-validation/reglement-validation.component';
 
 @NgModule({
   declarations: [
@@ -136,6 +138,8 @@ import { UpdateHangarComponent } from './mg/component/hangar/update-hangar/updat
     AddHangarComponent,
     HangarDetailsComponent,
     UpdateHangarComponent,
+    RecuPrintComponent,
+    ReglementValidationComponent,
   ],
   imports: [
     BrowserModule,

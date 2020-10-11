@@ -34,6 +34,7 @@ public class Pesage implements Serializable {
     private String conducteurCin;
     private String vendeurCin;
     
+    private long produit;
     private long typeProduit;
     private long sousTypeProduit;
 
@@ -58,7 +59,7 @@ public class Pesage implements Serializable {
     @OneToMany(mappedBy = "pesage", cascade = CascadeType.ALL)
     private List<FilePjPesage> files;
     
-    @OneToOne
-	private Recu recu;
+    @OneToOne(mappedBy = "pesage", cascade = CascadeType.ALL)
+    private Recu recu;
 	
 }

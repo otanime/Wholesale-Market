@@ -11,6 +11,5 @@ import ma.sic.mg.ballance.entities.FilePjPesage;
 public interface FileRepository extends JpaRepository<FilePjPesage, Long> {
 
     FilePjPesage findById(long id);
-
     List<FilePjPesage> findByPesage_Id(long id);
 }

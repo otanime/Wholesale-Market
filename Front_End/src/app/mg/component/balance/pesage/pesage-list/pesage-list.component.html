@@ -20,6 +20,7 @@
         </div>
     </div><!-- /.container-fluid -->
 </section>
+
 <section class="content">
 
     <!-- Default box -->
@@ -77,6 +78,11 @@
                       </td>
 
                       <td class="project-actions text-center">
+                          <a class="btn btn-action-print btn-action"
+                          (click)="selectedPesage = pesage"
+                          data-toggle="modal" data-target=".print-recu">
+                              <i class="fas fa-print"></i>
+                          </a>
                           <a class="btn btn-action-view btn-action"
                           (click)="selectedPesage = pesage"
                           data-toggle="modal" data-target=".show-pesage">
@@ -101,6 +107,7 @@
         <!-- /.card-body -->
     </div>
     <!-- /.card -->
+
 </section>
 
 <!-- add pesage -->
@@ -132,6 +139,8 @@
               <app-pesage-details
 
                 (isClosed)="loadData($event)"
+                (isDone)="aaaa($event)"
+
                 [pesage]="selectedPesage">
               </app-pesage-details>
             </div>
@@ -148,12 +157,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-              <!-- <app-update-pesage
+              <app-update-pesage
 
                 (isClosed)="loadData($event)"
+                (toPesageLord)="toPesageLord($event)"
                 [pesage]="selectedPesage">
 
-              </app-update-pesage> -->
+              </app-update-pesage>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -182,3 +192,24 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- fin delete pesage -->
+
+<!-- recu print -->
+<div class="modal fade print-recu myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">IMPRIMER LE RECU DE PESAGE</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+
+              <app-recu-print
+
+                [pesage]="pesageLord">
+
+              </app-recu-print>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin recu print -->

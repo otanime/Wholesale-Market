@@ -30,6 +30,10 @@ export class PersonneService {
     return this.http.get<AgentBalance[]>(API_URLS.AGENTBALACE_API);
   }
 
+  getMandataires() {
+    return this.http.get<Mandataire[]>(API_URLS.MANDATAIRE_API);
+  }
+
 
   createmandataire(mandataire: Mandataire): Observable<any> {
     return this.http.post<Mandataire>(API_URLS.MANDATAIRE_API,mandataire);

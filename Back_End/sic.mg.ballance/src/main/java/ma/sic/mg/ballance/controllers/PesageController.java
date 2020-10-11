@@ -2,8 +2,11 @@ package ma.sic.mg.ballance.controllers;
 
 import ma.sic.mg.ballance.entities.Pesage;
 import ma.sic.mg.ballance.entities.Recu;
+import ma.sic.mg.ballance.entities.Reglement;
+import ma.sic.mg.ballance.entities.Status;
 import ma.sic.mg.ballance.repositiries.PesageRepository;
 import ma.sic.mg.ballance.repositiries.RecuRepository;
+import ma.sic.mg.ballance.repositiries.ReglementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,9 @@ public class PesageController {
     @Autowired
     RecuRepository recuRepository;
 
+    @Autowired
+    ReglementRepository reglementRepository;
+
     @GetMapping("")
     public List<Pesage> findAll() {
 
@@ -33,7 +39,11 @@ public class PesageController {
 
         Recu recu = new Recu();
         recu.setPesage(myPesage);
-        recuRepository.save(recu);
+
+        Reglement reglement = new Reglement();
+        reglement.setRecu(recuRepository.save(recu));
+        reglement.setStatut(Status.INVALIDE);
+        reglementRepository.save(reglement);
 
         return myPesage;
     }
@@ -48,6 +58,12 @@ public class PesageController {
     public Pesage getOne(@PathVariable(required = true) String id) {
 
         return pesageRepository.findById(Long.parseLong(id));
+    }
+
+    @GetMapping("/{id}/recu")
+    public Recu getRecu(@PathVariable(required = true) String id) {
+
+        return pesageRepository.findById(Long.parseLong(id)).getRecu();
     }
 
     @DeleteMapping(value = "/{id}")

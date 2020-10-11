@@ -36,6 +36,7 @@ import { HangarListComponent } from './mg/component/hangar/hangar-list/hangar-li
 
 // Balance MS
 import { PesageListComponent } from './mg/component/balance/pesage/pesage-list/pesage-list.component';
+import { ReglementValidationComponent } from './mg/component/balance/reglement/reglement-validation/reglement-validation.component';
 
 
 
@@ -80,6 +81,7 @@ const routes: Routes = [
 
     // Balance MS
     {path: 'pesages',component : PesageListComponent},
+    {path: 'reglements',component : ReglementValidationComponent},
 
 
 ]},

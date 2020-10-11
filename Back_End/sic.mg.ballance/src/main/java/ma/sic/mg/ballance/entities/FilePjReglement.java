@@ -1,36 +1,34 @@
 package ma.sic.mg.ballance.entities;
 
-import java.io.Serializable;
-
-import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@JsonIgnoreProperties(value = ("pesage"), allowSetters = true)
+@JsonIgnoreProperties(value = ("reglement"), allowSetters = true)
+public class FilePjReglement implements Serializable {
 
-public class Recu implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-	
-	
-	@OneToOne
-	private Pesage pesage;
 
-	@OneToOne(mappedBy = "recu", cascade = CascadeType.ALL)
-	private Reglement reglement;
+    private String name;
+    private String type;
+
+    @Lob
+    private byte[] data;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Reglement reglement;
+
 
 }

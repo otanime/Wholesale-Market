@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Pesage } from "../../../../modules/pesage";
+import { PesageLord } from "../../../../modules/pesage";
 import { PesageService } from "../pesage.service";
 
 declare var $ :any;
@@ -17,10 +18,12 @@ export class PesageListComponent implements OnInit {
 
   componentName : string = "Pesage"
 
-  pesages : Pesage[] = [];
-  selectedPesage : Pesage;
+  pesages : Pesage[] = []
+  selectedPesage : Pesage
+  pesageLord : PesageLord
 
   deleteConfirmation : string = ""
+
 
   constructor(
     private pesageService : PesageService,
@@ -39,14 +42,22 @@ export class PesageListComponent implements OnInit {
 
     $(document).ready(function() {
 
-      const table: any = $('#myDataTable');
-      table.DataTable({
-        ordering:  false,
-        "bLengthChange" : false,
-        "bInfo":false,
-      })
+
+
+      if ( ! $.fn.DataTable.isDataTable('#myDataTable') ) {
+
+        const table: any = $('#myDataTable');
+        table.DataTable({
+          ordering:  false,
+          "bLengthChange" : false,
+          "bInfo":false,
+        })
+      }
+
 
     });
+
+
   }
 
   loadData(){
@@ -58,13 +69,19 @@ export class PesageListComponent implements OnInit {
 
         this.dataTable()
 
-
       },
       error => {
         console.log("error")
       },
       () => { console.log('Pesage Data loading ... Done')}
     );
+
+  }
+
+  toPesageLord(pesageLord){
+
+    this.pesageLord = pesageLord
+
   }
 
   deletePesage(){

@@ -1,0 +1,237 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+
+
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">DashBoared</a></li>
+                    <li class="breadcrumb-item active">{{componentName}}</li>
+                </ol>
+            </div>
+        </div>
+        <div class="alert alert-success alert-dismissible" *ngIf="message">
+          <button type="butto
+          n" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h5><i class="icon fas fa-check"></i> Alert!</h5>
+          {{message}}
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> <b> Gestion de {{componentName}} </b></h3>
+
+        </div>
+        <div class="card-body p-0" style="display: block;">
+
+          <div class="reglement-area-search">
+
+            <div class="input-group">
+              <input type="text" class="form-control" style="text-transform: uppercase;" placeholder="Ex : 452" [(ngModel)]="reglementID">
+              <span class="input-group-append">
+                <button type="button" class="btn btn-search btn-flat" (click)="searchPesage()" [disabled]="reglementID == '' || reglementID == null">rechercher</button>
+              </span>
+            </div>
+
+
+          </div>
+
+          <table class="table myTable" [hidden]="!selectedPesage">
+              <thead>
+                  <tr>
+                      <th class="text-center" >
+                          #
+                      </th>
+                      <th class="text-center">
+                          Pesage le
+                      </th>
+                      <th class="text-center">
+                          Vehicule
+                      </th>
+                      <th class="text-center">
+                        conducteur
+                      </th>
+                      <th class="text-center">
+                          vendeur
+                      </th>
+                      <th class="text-center">
+                          statut
+                      </th>
+
+                      <th class="text-center" >
+                          <i class="fas fa-cog"></i>
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <th class="text-center" >
+                      {{selectedPesage?.id}}
+                    </th>
+                    <td class="text-center" >
+                      {{selectedPesage?.dateDeclaration | date :'dd/MM/yyyy HH:mm'}}
+                    </td>
+                    <td class="text-center" >
+                      {{selectedPesage?.vehiculeMatricule | uppercase}}
+                    </td>
+                    <td class="text-center" >
+                      {{selectedPesage?.conducteurCin | uppercase}}
+                    </td>
+                    <td class="text-center" >
+                      {{selectedPesage?.vendeurCin | uppercase}}
+                    </td>
+                    <td class="text-center td-statut {{ selectedPesage?.recu.reglement.statut == 'VALIDE' ? 'td-valide' : 'td-invalide'}}" >
+                      <small>{{selectedPesage?.recu.reglement.statut | uppercase}}</small>
+                    </td>
+
+                    <td class="project-actions text-center">
+
+                        <a class="btn btn-action-view btn-action"
+                        data-toggle="modal" data-target=".show-pesage" title="plus infos">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a class="btn btn-action-edit btn-action"
+                        data-toggle="modal" data-target=".valider-reglement" title="Valider">
+                            <i class="fas fa-check"></i>
+                        </a>
+
+                    </td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+
+<!-- show reglement -->
+<div class="modal fade show-pesage myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;" [hidden]="!selectedPesage">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">PESAGE NUMERO <span>{{ selectedPesage?.recu.reglement.id }}</span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+              <app-pesage-details
+
+                (isClosed)="loadData($event)"
+                [pesage]="selectedPesage">
+
+              </app-pesage-details>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin show reglement -->
+
+<!-- update reglement -->
+<div class="modal fade valider-reglement myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;" [hidden]="!selectedPesage">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">VALIDER LE REGLEMENT NUMERO <span>{{ selectedPesage?.id }}</span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="reglementForm" class="myForm">
+
+                <div class="form-group">
+                  <label for="name">mandataire</label>
+                  <select class="form-control mySelect" data-select="mandataire">
+                    <option *ngFor="let option of mandataires" [value]="option.idPers">[ {{ option.nom + ' ' + option.prenom | uppercase}}</option>
+                  </select>
+                  <p class="small alert-danger msg-error" *ngIf="reglementForm.controls.mandataire.invalid && (reglementForm.controls.mandataire.touched || reglementForm.controls.mandataire.dirty)">Ce champ est null ou mal saisi</p>
+                </div>
+
+
+                <div class="form-group">
+                  <label for="name">observation</label>
+                  <textarea class="form-control" formControlName="observation" rows="2" cols="80"></textarea>
+                  <p class="small alert-danger msg-error" *ngIf="reglementForm.controls.observation.invalid && (reglementForm.controls.observation.touched || reglementForm.controls.observation.dirty)">Ce champ est null ou mal saisi</p>
+                </div>
+
+                <div class="input-group file-upload">
+                  <input type="file" class="form-control myFile" (change)="selectFile($event)">
+                  <div class="input-group-append">
+                    <span class="input-group-text myFileButton" (click)="uploadFile()" >Upload</span>
+                  </div>
+                </div>
+
+
+                <table *ngIf="files?.length > 0" class="table myTable-files">
+                    <tbody>
+                        <tr>
+
+                          <th class="text-center" [attr.rowspan]="files?.length * 2">
+                            les pieces jointes
+                          </th>
+
+                        </tr>
+                        <tr *ngFor="let file of files;">
+
+                          <td class="text-center" >
+                            {{file?.name | uppercase}}
+                          </td>
+                          <td class="project-actions text-center">
+
+                              <a class="btn btn-action-edit btn-action"
+                              href="{{file?.url}}"
+                              title="{{ file?.size | number }} MB">
+                                <i class="fas fa-download"></i>
+                              </a>
+
+                              <a class="btn btn-action-delete btn-action"
+                              (click)="selectedFile = file"
+                              data-toggle="modal" data-target=".delete-file-reglement">
+                                  <i class="fas fa-trash"></i>
+                              </a>
+
+                          </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button
+
+                [disabled]="reglementForm.pristine || reglementForm.invalid || reglementForm.controls.errors"
+                  type="submit" class="btn btn-form-submit"
+                  (click)="valideReglement()"
+                  >Valider</button>
+
+              </form>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin update reglement -->
+
+<!-- delete file -->
+<div class="modal fade delete-file-reglement myModal"  tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myAddModalLabel">supprission de file</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+
+              <h4 class="delete-msg">Voulez-vous vraiment supprimer ce file ?!</h4>
+              <input [(ngModel)]="deleteConfirmation" type="text"  parsley-trigger="change" required="" placeholder="confirmez la supprission en saisissant 'YES'" class="form-control delete-confirmation">
+
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="deleteConfirmation.toUpperCase() != 'YES'"
+                (click)="deleteFile()" type="button" class="btn btn-delete waves-effect waves-light">Supprimer</button>
+                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Anuller</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- fin delete file -->
